@@ -1,0 +1,26 @@
+﻿@model System.Linq.IQueryable<WebApplication1.Models.Tweet>
+
+@{
+    ViewBag.Title = "Mine";
+}
+
+<h2> Tweets </h2>
+<table class="table">
+    <tr>
+        <th> Username </th>
+        <th> Content </th>
+    </tr>
+    @foreach (var tweet in Model)
+    {
+        <tr>
+            <td> @tweet.User.UserName </td>
+            <td> @tweet.Content </td>
+            <td>
+                <a href="#"> Reply </a>
+                <a href="#"> Retweet </a>
+                <a href="#"> Like </a>
+                <a href="#"> Delete </a>
+            </td>
+        </tr>
+    }
+</table>

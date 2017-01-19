@@ -1,0 +1,19 @@
+﻿@model IEnumerable<WebApplication1.Models.Tweet>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<table class="table">
+    <tr>
+        <th> @Html.DisplayNameFor(t=>t.User.UserName)</th>
+        <th>@Html.DisplayNameFor(t=>t.Content)</th>
+    </tr>
+    @foreach (var tweet in Model)
+    {
+        <tr>
+            <td> @tweet.User.UserName </td>
+            <td> @tweet.Content </td>
+        </tr>
+    }
+</table>
