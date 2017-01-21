@@ -23,13 +23,16 @@ namespace WebApplication1.Controllers.Api
             IEnumerable<Claim> claims = identity.Claims;
             Claim c = claims?.First();
             string userId = c?.Value;
+
             if (_context.Likes.Any(n => n.TweetId == dto.TweetId && n.UserId == userId))
                 return BadRequest();
+
             var like = new Like
             {
                 UserId = userId, 
                 TweetId = dto.TweetId
             };
+
             _context.Likes.Add(like);
             _context.SaveChanges();
             return Ok();

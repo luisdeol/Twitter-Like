@@ -16,7 +16,8 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Tweets", _context.Tweets.Include(t=> t.User).ToList());
+            var tweets = _context.Tweets.Include(t => t.User).ToList();
+            return RedirectToAction("Index", "Tweets", tweets);
         }
 
         public ActionResult About()
