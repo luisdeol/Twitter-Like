@@ -27,11 +27,7 @@ namespace WebApplication1.Controllers.Api
             if (_context.Likes.Any(n => n.TweetId == dto.TweetId && n.UserId == userId))
                 return BadRequest();
 
-            var like = new Like
-            {
-                UserId = userId, 
-                TweetId = dto.TweetId
-            };
+            var like = new Like(userId, dto.TweetId);
 
             _context.Likes.Add(like);
             _context.SaveChanges();

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WebApplication1.Models.Like>
+    
+
+@{
+    ViewBag.Title = "MyActivities";
+}
+
+<h2>My Activities</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Activty
+        </th>
+    </tr>
+    @foreach (var activity in Model)
+    {
+        <tr>
+            <td>
+                @activity.User.UserName liked the Tweet from @activity.Tweet.User.UserName with the content @activity.Tweet.Content.
+            </td>
+        </tr>
+    }
+</table>
+

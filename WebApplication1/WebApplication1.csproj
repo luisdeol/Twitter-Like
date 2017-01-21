@@ -182,6 +182,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\LikesController.cs" />
+    <Compile Include="Controllers\Api\TweetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
@@ -201,8 +202,17 @@
     <Compile Include="Migrations\201701191332205_Like.Designer.cs">
       <DependentUpon>201701191332205_Like.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701211328080_DesperateTryCollectionsToTweet.cs" />
+    <Compile Include="Migrations\201701211328080_DesperateTryCollectionsToTweet.Designer.cs">
+      <DependentUpon>201701211328080_DesperateTryCollectionsToTweet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701211431318_JesusSaveMe.cs" />
+    <Compile Include="Migrations\201701211431318_JesusSaveMe.Designer.cs">
+      <DependentUpon>201701211431318_JesusSaveMe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Like.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -219,6 +229,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\controllers\likesController.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -272,6 +284,7 @@
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Tweets\Create.cshtml" />
     <Content Include="Views\Tweets\Mine.cshtml" />
+    <Content Include="Views\Shared\MyActivities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -293,6 +306,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701191332205_Like.resx">
       <DependentUpon>201701191332205_Like.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701211328080_DesperateTryCollectionsToTweet.resx">
+      <DependentUpon>201701211328080_DesperateTryCollectionsToTweet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701211431318_JesusSaveMe.resx">
+      <DependentUpon>201701211431318_JesusSaveMe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,6 +14,7 @@ namespace WebApplication1.Controllers
             _context = new ApplicationDbContext();
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             var tweets = _context.Tweets.Include(t => t.User).ToList();

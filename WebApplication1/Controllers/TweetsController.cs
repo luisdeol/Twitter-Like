@@ -68,5 +68,18 @@ namespace WebApplication1.Controllers
 
             return View(tweets);
         }
+
+        [Authorize]
+        public ActionResult MyActivities()
+        {
+            string userId = User.Identity.GetUserId();
+            var likes = _context.Likes
+                .Include(l=> l.Tweet)
+                .Include(l=> l.User)
+                .Include(l=> l.Tweet.User)
+                .Where(l => l.UserId == userId);
+
+            return View(likes);
+        }
     }
 }

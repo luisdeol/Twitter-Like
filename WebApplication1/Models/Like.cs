@@ -15,5 +15,16 @@ namespace WebApplication1.Models
 
         public ApplicationUser User { get; set; }
         public Tweet Tweet { get; set; }
+
+        public Like()
+        {
+            
+        }
+
+        public Like(string userId, int tweetId)
+        {
+            UserId = userId;
+            TweetId = tweetId;
+        }
     }
 }
