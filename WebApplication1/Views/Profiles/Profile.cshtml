@@ -1,0 +1,29 @@
+﻿@model WebApplication1.ViewModels.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2> @Model.ProfileUser.UserName Profile </h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Content
+        </th>
+        <th>
+            DateTime
+        </th>
+    </tr>
+    @foreach (var tweet in Model.Tweets)
+    {
+        <tr>
+            <td>
+                @tweet.Content
+            </td>
+            <td>
+                @tweet.CreatedAt.ToString("g")
+            </td>
+        </tr>
+    }
+</table>

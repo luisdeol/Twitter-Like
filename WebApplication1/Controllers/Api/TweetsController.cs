@@ -16,12 +16,6 @@ namespace WebApplication1.Controllers.Api
         }
         // DELETE api/<controller>/5
 
-        [HttpGet]
-        public string Get()
-        {
-            return "Teste";
-        }
-
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {

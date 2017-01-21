@@ -185,6 +185,7 @@
     <Compile Include="Controllers\Api\TweetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Dtos\LikeDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -219,6 +220,7 @@
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\TweetFormViewModel.cs" />
     <Compile Include="ViewModels\TweetsViewModel.cs" />
   </ItemGroup>
@@ -285,6 +287,7 @@
     <Content Include="Views\Tweets\Create.cshtml" />
     <Content Include="Views\Tweets\Mine.cshtml" />
     <Content Include="Views\Shared\MyActivities.cshtml" />
+    <Content Include="Views\Profiles\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
