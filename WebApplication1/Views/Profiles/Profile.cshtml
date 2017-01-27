@@ -4,10 +4,13 @@
     ViewBag.Title = "Profile";
 }
 
-<h2> @Model.ProfileUser.UserName Profile </h2>
+<h2> @Model.ProfileUser Profile </h2>
 
 <table class="table">
     <tr>
+        <th>
+            UserName
+        </th>
         <th>
             Content
         </th>
@@ -18,6 +21,9 @@
     @foreach (var tweet in Model.Tweets)
     {
         <tr>
+            <td>
+                @tweet.User.UserName
+            </td>
             <td>
                 @tweet.Content
             </td>

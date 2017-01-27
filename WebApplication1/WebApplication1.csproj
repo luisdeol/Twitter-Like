@@ -211,14 +211,33 @@
     <Compile Include="Migrations\201701211431318_JesusSaveMe.Designer.cs">
       <DependentUpon>201701211431318_JesusSaveMe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701250056451_ExtendingUserIdentity.cs" />
+    <Compile Include="Migrations\201701250056451_ExtendingUserIdentity.Designer.cs">
+      <DependentUpon>201701250056451_ExtendingUserIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701250105584_UserName.cs" />
+    <Compile Include="Migrations\201701250105584_UserName.Designer.cs">
+      <DependentUpon>201701250105584_UserName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701271718539_AddActivityClassAndTypes.cs" />
+    <Compile Include="Migrations\201701271718539_AddActivityClassAndTypes.Designer.cs">
+      <DependentUpon>201701271718539_AddActivityClassAndTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActivityTypes.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Like.cs" />
+    <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Tweet.cs" />
+    <Compile Include="Persistence\IUnitOfWork.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ActivityRepository.cs" />
+    <Compile Include="Repositories\IActivityRepository.cs" />
+    <Compile Include="Repositories\ITweetRepository.cs" />
+    <Compile Include="Repositories\TweetRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\TweetFormViewModel.cs" />
@@ -315,6 +334,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701211431318_JesusSaveMe.resx">
       <DependentUpon>201701211431318_JesusSaveMe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701250056451_ExtendingUserIdentity.resx">
+      <DependentUpon>201701250056451_ExtendingUserIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701250105584_UserName.resx">
+      <DependentUpon>201701250105584_UserName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701271718539_AddActivityClassAndTypes.resx">
+      <DependentUpon>201701271718539_AddActivityClassAndTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

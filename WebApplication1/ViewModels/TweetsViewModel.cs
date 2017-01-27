@@ -9,6 +9,6 @@ namespace WebApplication1.ViewModels
         public IEnumerable<Tweet> Tweets { get; set; }
         public bool IsAuthenticated { get; set; }
         public TweetFormViewModel TweetFormViewModel { get; set; }
-        public ILookup<int, Like> Likes { get; set; }
+        public ILookup<int, Activity> Likes { get; set; }
     }
 }

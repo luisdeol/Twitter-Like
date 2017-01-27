@@ -11,7 +11,7 @@ namespace WebApplication1.Models
         }
 
         public DbSet<Tweet> Tweets { get; set; }
-        public DbSet<Like> Likes { get; set; }
+        public DbSet<Activity> Activities { get; set; }
 
         public static ApplicationDbContext Create()
         {

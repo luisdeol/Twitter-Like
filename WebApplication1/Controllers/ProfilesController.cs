@@ -16,16 +16,26 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Profiles
-        public ActionResult ShowProfile(string id)
+        public ActionResult ShowProfile(string username)
         {
             string userId = User.Identity.GetUserId();
+
             var tweets = _context.Tweets
+                .Where(t => t.User.UserName == username)
                 .Include(t=> t.User)
-                .Where(t => t.UserId == id);
+                .ToList();
+
+            var likedTweets = _context.Activities
+                .Where(l => l.UserId == userId)
+                .Include(l => l.Tweet)
+                .Select(l=> l.Tweet)
+                .Include(l => l.User);
+
+            tweets.AddRange(likedTweets);
 
             var viewModel = new ProfileViewModel
             {
-                ProfileUser = tweets.First().User,
+                ProfileUser = username,
                 Tweets = tweets
             };
             return View("Profile", viewModel);

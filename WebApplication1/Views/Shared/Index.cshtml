@@ -40,7 +40,7 @@
     @foreach (var tweet in Model.Tweets)
     {
         <tr>
-            <td><a href="@Url.Action("ShowProfile", "Profiles", new { id = @tweet.UserId })"> @tweet.User.UserName </a></td>
+            <td><a href="@Url.Action("ShowProfile", "Profiles", new { username = @tweet.User.UserName })"> @tweet.User.UserName </a></td>
             <td> @tweet.Content </td>
             <td> @tweet.CreatedAt.ToString("g")</td>
             @if (Model.IsAuthenticated)

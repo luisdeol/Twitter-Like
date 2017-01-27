@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebApplication1.Models.Like>
+﻿@using WebApplication1.Models
+@model IEnumerable<WebApplication1.Models.Activity>
     
 
 @{
@@ -15,11 +16,15 @@
     </tr>
     @foreach (var activity in Model)
     {
-        <tr>
-            <td>
-                @activity.User.UserName liked the Tweet from @activity.Tweet.User.UserName with the content @activity.Tweet.Content.
-            </td>
-        </tr>
+        if (activity.ActivityType == ActivityTypes.TweetLike)
+        {
+            <tr>
+                <td>
+                    @activity.User.UserName liked the Tweet from @activity.Tweet.User.UserName with the content @activity.Tweet.Content.
+                </td>
+            </tr>
+        }
+
     }
 </table>
 

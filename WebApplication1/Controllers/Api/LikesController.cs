@@ -9,7 +9,7 @@ namespace WebApplication1.Controllers.Api
 {
     public class LikesController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public LikesController()
         {
@@ -24,12 +24,12 @@ namespace WebApplication1.Controllers.Api
             Claim c = claims?.First();
             string userId = c?.Value;
 
-            if (_context.Likes.Any(n => n.TweetId == dto.TweetId && n.UserId == userId))
+            if (_context.Activities.Any(n => n.TweetId == dto.TweetId && n.UserId == userId))
                 return BadRequest();
 
-            var like = new Like(userId, dto.TweetId);
+            var like = new Activity(userId, dto.TweetId, ActivityTypes.TweetLike);
 
-            _context.Likes.Add(like);
+            _context.Activities.Add(like);
             _context.SaveChanges();
             return Ok();
         }
@@ -42,12 +42,12 @@ namespace WebApplication1.Controllers.Api
             Claim claim = claims?.First();
             var userId = claim?.Value;
 
-            var like = _context.Likes.Single(l => l.UserId == userId && l.TweetId == id);
+            var like = _context.Activities.Single(l => l.UserId == userId && l.TweetId == id && l.ActivityType == ActivityTypes.TweetLike);
 
             if (like == null)
                 return BadRequest();
 
-            _context.Likes.Remove(like);
+            _context.Activities.Remove(like);
             _context.SaveChanges();
 
             return Ok();

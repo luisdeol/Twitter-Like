@@ -15,11 +15,11 @@ namespace WebApplication1.Models
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
-        public ICollection<Like> Likes { get; private set; }
+        public ICollection<Activity> Activities { get; private set; }
 
         public Tweet()
         {
-            Likes = new Collection<Like>();
+            Activities = new Collection<Activity>();
         }
 
         public Tweet(string content, string userId)
