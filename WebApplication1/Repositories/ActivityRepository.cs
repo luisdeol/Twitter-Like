@@ -14,17 +14,25 @@ namespace WebApplication1.Repositories
             _context = context;
         }
 
-        public ILookup<int, Activity> GetLookupActivities(string userId)
+        public ILookup<int, Activity> GetLookupLikes(string userId)
         {
             return _context.Activities
-                .Where(l => l.UserId == userId 
-                && (l.ActivityType == ActivityTypes.TweetLike 
-                    || l.ActivityType == ActivityTypes.TweetRetweet)
+                .Where(l => l.UserId == userId && 
+                            l.ActivityType == ActivityTypes.TweetLike
                 )
                 .ToList()
                 .ToLookup(l => l.TweetId);
         }
 
+        public ILookup<int, Activity> GetLookupRetweets(string userId)
+        {
+            return _context.Activities
+                .Where(r => r.UserId == userId &&
+                            r.ActivityType == ActivityTypes.TweetRetweet)
+                .ToList()
+                .ToLookup(r => r.TweetId);
+
+        }
         public IEnumerable<Activity> GetMyActivities(string userId)
         {
             return _context.Activities
@@ -33,5 +41,6 @@ namespace WebApplication1.Repositories
                 .Include(l => l.Tweet.User)
                 .Where(l => l.UserId == userId);
         }
+
     }
 }

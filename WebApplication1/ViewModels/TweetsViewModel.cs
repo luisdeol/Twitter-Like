@@ -10,5 +10,6 @@ namespace WebApplication1.ViewModels
         public bool IsAuthenticated { get; set; }
         public TweetFormViewModel TweetFormViewModel { get; set; }
         public ILookup<int, Activity> Likes { get; set; }
+        public ILookup<int, Activity> Retweets { get; set; }
     }
 }

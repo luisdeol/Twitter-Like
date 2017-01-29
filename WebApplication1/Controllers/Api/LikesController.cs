@@ -17,14 +17,16 @@ namespace WebApplication1.Controllers.Api
         }
 
         [HttpPost]
-        public IHttpActionResult Like(LikeDto dto)
+        public IHttpActionResult Like(ActivityDto dto)
         {
             var identity = (ClaimsIdentity) User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             Claim c = claims?.First();
             string userId = c?.Value;
 
-            if (_context.Activities.Any(n => n.TweetId == dto.TweetId && n.UserId == userId))
+            if (_context.Activities.Any(n => n.TweetId == dto.TweetId && 
+                                        n.UserId == userId &&
+                                        n.ActivityType == ActivityTypes.TweetLike))
                 return BadRequest();
 
             var like = new Activity(userId, dto.TweetId, ActivityTypes.TweetLike);

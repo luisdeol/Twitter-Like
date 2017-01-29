@@ -1,6 +1,6 @@
 ﻿namespace WebApplication1.Dtos
 {
-    public class LikeDto
+    public class ActivityDto
     {
         public int TweetId { get; set; }
     }

@@ -23,14 +23,16 @@ namespace WebApplication1.Controllers
 
             string userId = User.Identity.GetUserId();
 
-            var likes = _unitOfWork.Activities.GetLookupActivities(userId);
+            var likes = _unitOfWork.Activities.GetLookupLikes(userId);
+            var retweets = _unitOfWork.Activities.GetLookupRetweets(userId);
 
             TweetsViewModel tvm = new TweetsViewModel
             {
                 Tweets = tweets,
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 TweetFormViewModel =  new TweetFormViewModel(),
-                Likes = likes
+                Likes = likes,
+                Retweets =  retweets
             };
             return View(tvm);
         }

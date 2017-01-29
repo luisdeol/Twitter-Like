@@ -47,7 +47,9 @@
             {
                 <td>
                     <a href="#"> Reply </a>
-                    <a href="#"> Retweet </a>
+                    <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-tweet-id="@tweet.Id">
+                        @(Model.Retweets.Contains(@tweet.Id) ? "Retweeted" : "Retweet")
+                    </button>
                     <button class="btn btn-link js-like @(Model.Likes.Contains(@tweet.Id) ? "liked" : "like") " data-tweet-id="@tweet.Id">
                         @(Model.Likes.Contains(@tweet.Id) ? "Liked" : "Like") 
                     </button>
@@ -60,13 +62,36 @@
 @section scripts {
     <script>
         $(document).ready(function() {
+            $('.js-retweet').click(function(e) {
+                var button = $(e.target);
+                if (button.hasClass('retweet')) {
+                    $.post('/api/retweets/', { TweetId: button.attr('data-tweet-id') })
+                        .done(function() {
+                            button.text('Retweeted');
+                        })
+                        .fail(function() {
+                            alert("Something went wrong!");
+                        });
+                } else {
+                    $.ajax({
+                        url: 'api/retweets/' + button.attr('data-tweet-id'),
+                        method: 'DELETE'
+                    })
+                    .done(function() {
+                            button.text("Retweet");
+                        })
+                    .fail(function() {
+                            alert("Something went wrong!");
+                        });
+                }
+            });
             $(".js-like").click(function(e) {
-                button = $(e.target);
+                var button = $(e.target);
                 if (button.hasClass("liked")) {
                     $.ajax({
-                        url: "/api/likes/" + button.attr("data-tweet-id"),
-                        method: "DELETE"
-                    })
+                            url: "/api/likes/" + button.attr("data-tweet-id"),
+                            method: "DELETE"
+                        })
                         .done(function() {
                             button.text("Like");
                         }).fail(function() {

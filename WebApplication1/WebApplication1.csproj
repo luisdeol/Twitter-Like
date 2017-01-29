@@ -182,12 +182,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\LikesController.cs" />
+    <Compile Include="Controllers\Api\RetweetsController.cs" />
     <Compile Include="Controllers\Api\TweetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
-    <Compile Include="Dtos\LikeDto.cs" />
+    <Compile Include="Dtos\ActivityDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -222,6 +223,10 @@
     <Compile Include="Migrations\201701271718539_AddActivityClassAndTypes.cs" />
     <Compile Include="Migrations\201701271718539_AddActivityClassAndTypes.Designer.cs">
       <DependentUpon>201701271718539_AddActivityClassAndTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701291712448_AddActivity.cs" />
+    <Compile Include="Migrations\201701291712448_AddActivity.Designer.cs">
+      <DependentUpon>201701291712448_AddActivity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -343,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701271718539_AddActivityClassAndTypes.resx">
       <DependentUpon>201701271718539_AddActivityClassAndTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701291712448_AddActivity.resx">
+      <DependentUpon>201701291712448_AddActivity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

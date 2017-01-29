@@ -13,10 +13,12 @@ namespace WebApplication1.Models
         [Column(Order = 2)]
         public int TweetId { get; set; }
 
+        [Key]
+        [Column(Order = 3)]
+        public ActivityTypes ActivityType { get; set; }
+
         public ApplicationUser User { get; set; }
         public Tweet Tweet { get; set; }
-
-        public ActivityTypes ActivityType { get; set; }
 
         public Activity()
         {
