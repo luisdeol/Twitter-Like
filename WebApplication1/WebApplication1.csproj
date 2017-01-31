@@ -182,6 +182,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\LikesController.cs" />
+    <Compile Include="Controllers\Api\ReportsController.cs" />
     <Compile Include="Controllers\Api\RetweetsController.cs" />
     <Compile Include="Controllers\Api\TweetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityTypes.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\IApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -315,6 +317,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

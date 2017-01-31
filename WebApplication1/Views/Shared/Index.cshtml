@@ -39,24 +39,29 @@
     </tr>
     @foreach (var tweet in Model.Tweets)
     {
-        <tr>
-            <td><a href="@Url.Action("ShowProfile", "Profiles", new { username = @tweet.User.UserName })"> @tweet.User.UserName </a></td>
-            <td> @tweet.Content </td>
-            <td> @tweet.CreatedAt.ToString("g")</td>
-            @if (Model.IsAuthenticated)
-            {
-                <td>
-                    <a href="#"> Reply </a>
-                    <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-tweet-id="@tweet.Id">
-                        @(Model.Retweets.Contains(@tweet.Id) ? "Retweeted" : "Retweet")
-                    </button>
-                    <button class="btn btn-link js-like @(Model.Likes.Contains(@tweet.Id) ? "liked" : "like") " data-tweet-id="@tweet.Id">
-                        @(Model.Likes.Contains(@tweet.Id) ? "Liked" : "Like") 
-                    </button>
-                    <a href="#"> Report </a>
-                </td>
-            }
-        </tr>
+        if (!Model.Reports.Contains(@tweet.Id))
+        {
+            <tr>
+                <td><a href="@Url.Action("ShowProfile", "Profiles", new { username = @tweet.User.UserName })"> @tweet.User.UserName </a></td>
+                <td> @tweet.Content </td>
+                <td> @tweet.CreatedAt.ToString("g")</td>
+                @if (Model.IsAuthenticated)
+                {
+                    <td>
+                        <a href="#"> Reply </a>
+                        <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-tweet-id="@tweet.Id">
+                            @(Model.Retweets.Contains(@tweet.Id) ? "Retweeted" : "Retweet")
+                        </button>
+                        <button class="btn btn-link js-like @(Model.Likes.Contains(@tweet.Id) ? "liked" : "like") " data-tweet-id="@tweet.Id">
+                            @(Model.Likes.Contains(@tweet.Id) ? "Liked" : "Like")
+                        </button>
+                        <button class="btn btn-link js-report" data-tweet-id="@tweet.Id">
+                            Report
+                        </button>
+                    </td>
+                }
+            </tr>
+        }
     }
 </table>
 @section scripts {
@@ -66,7 +71,7 @@
                 var button = $(e.target);
                 if (button.hasClass('retweet')) {
                     $.post('/api/retweets/', { TweetId: button.attr('data-tweet-id') })
-                        .done(function() {
+                        .done(function() {  
                             button.text('Retweeted');
                         })
                         .fail(function() {
@@ -106,6 +111,16 @@
                             alert("Something went wrong!");
                         });
                 }
+            });
+            $(".js-report").click(function (e) {
+                var button = $(e.target);
+                $.post("/api/reports", { TweetId: button.attr("data-tweet-id") })
+                        .done(function () {
+                            button.text("Reported");
+                        })
+                        .fail(function () {
+                            alert("Something went wrong!");
+                        });
             });
         });
     </script>

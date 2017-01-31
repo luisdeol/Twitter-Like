@@ -44,7 +44,10 @@ namespace WebApplication1.Controllers.Api
             Claim claim = claims?.First();
             var userId = claim?.Value;
 
-            var like = _context.Activities.Single(l => l.UserId == userId && l.TweetId == id && l.ActivityType == ActivityTypes.TweetLike);
+            var like = _context.Activities
+                .Single(l => l.UserId == userId && 
+                             l.TweetId == id && 
+                             l.ActivityType == ActivityTypes.TweetLike);
 
             if (like == null)
                 return BadRequest();

@@ -25,6 +25,7 @@ namespace WebApplication1.Controllers
 
             var likes = _unitOfWork.Activities.GetLookupLikes(userId);
             var retweets = _unitOfWork.Activities.GetLookupRetweets(userId);
+            var reports = _unitOfWork.Activities.GetLookupReports(userId);
 
             TweetsViewModel tvm = new TweetsViewModel
             {
@@ -32,7 +33,8 @@ namespace WebApplication1.Controllers
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 TweetFormViewModel =  new TweetFormViewModel(),
                 Likes = likes,
-                Retweets =  retweets
+                Retweets =  retweets,
+                Reports = reports
             };
             return View(tvm);
         }

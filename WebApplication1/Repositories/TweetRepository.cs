@@ -7,9 +7,9 @@ namespace WebApplication1.Repositories
 {
     public class TweetRepository : ITweetRepository
     {
-        private ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public TweetRepository(ApplicationDbContext context)
+        public TweetRepository(IApplicationDbContext context)
         {
             _context = context;
         }

@@ -7,9 +7,9 @@ namespace WebApplication1.Repositories
 {
     public class ActivityRepository : IActivityRepository
     {
-        private ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public ActivityRepository(ApplicationDbContext context)
+        public ActivityRepository(IApplicationDbContext context)
         {
             _context = context;
         }
@@ -31,7 +31,14 @@ namespace WebApplication1.Repositories
                             r.ActivityType == ActivityTypes.TweetRetweet)
                 .ToList()
                 .ToLookup(r => r.TweetId);
-
+        }
+        public ILookup<int, Activity> GetLookupReports(string userId)
+        {
+            return _context.Activities
+                .Where(r => r.UserId == userId &&
+                            r.ActivityType == ActivityTypes.TweetReport)
+                .ToList()
+                .ToLookup(r => r.TweetId);
         }
         public IEnumerable<Activity> GetMyActivities(string userId)
         {

@@ -11,5 +11,6 @@ namespace WebApplication1.ViewModels
         public TweetFormViewModel TweetFormViewModel { get; set; }
         public ILookup<int, Activity> Likes { get; set; }
         public ILookup<int, Activity> Retweets { get; set; }
+        public ILookup<int, Activity> Reports { get; set; }
     }
 }
