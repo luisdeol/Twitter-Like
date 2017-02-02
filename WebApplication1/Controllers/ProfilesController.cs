@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNet.Identity;
-using System.Data.Entity;
-using System.Linq;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Persistence;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
     public class ProfilesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
+
         public ProfilesController()
         {
-            _context = new ApplicationDbContext();
+            var context = new ApplicationDbContext();
+            _unitOfWork = new UnitOfWork(context);
         }
 
         // GET: Profiles
@@ -20,18 +21,11 @@ namespace WebApplication1.Controllers
         {
             string userId = User.Identity.GetUserId();
 
-            var tweets = _context.Tweets
-                .Where(t => t.User.UserName == username)
-                .Include(t=> t.User)
-                .ToList();
+            var tweets = _unitOfWork.Tweets.GetTweetsByUsername(username);
 
-            var likedTweets = _context.Activities
-                .Where(l => l.UserId == userId)
-                .Include(l => l.Tweet)
-                .Select(l=> l.Tweet)
-                .Include(l => l.User);
+            var retweetedTweets = _unitOfWork.Activities.GetRetweetedTweets(userId);
 
-            tweets.AddRange(likedTweets);
+            tweets.AddRange(retweetedTweets);
 
             var viewModel = new ProfileViewModel
             {

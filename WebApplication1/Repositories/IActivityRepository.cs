@@ -10,5 +10,6 @@ namespace WebApplication1.Repositories
         IEnumerable<Activity> GetMyActivities(string userId);
         ILookup<int, Activity> GetLookupLikes(string userId);
         ILookup<int, Activity> GetLookupReports(string userId);
+        IEnumerable<Tweet> GetRetweetedTweets(string userId);
     }
 }

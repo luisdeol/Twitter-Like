@@ -49,5 +49,14 @@ namespace WebApplication1.Repositories
                 .Where(l => l.UserId == userId);
         }
 
+        public IEnumerable<Tweet> GetRetweetedTweets(string userId)
+        {
+            return _context.Activities
+                .Where(a => a.UserId == userId && a.ActivityType == ActivityTypes.TweetRetweet)
+                .Include(a => a.Tweet)
+                .Select(a => a.Tweet)
+                .Include(a => a.User);
+        }
+
     }
 }

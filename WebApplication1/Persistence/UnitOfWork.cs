@@ -7,7 +7,7 @@ namespace WebApplication1.Persistence
     {
         public ITweetRepository Tweets { get; set; }
         public IActivityRepository Activities { get; set; }
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public UnitOfWork(ApplicationDbContext context)
         {

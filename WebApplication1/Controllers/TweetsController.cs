@@ -8,13 +8,12 @@ namespace WebApplication1.Controllers
 {
     public class TweetsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
         public TweetsController()
         {
-            _context = new ApplicationDbContext();
-            _unitOfWork = new UnitOfWork(_context);
+            var context = new ApplicationDbContext();
+            _unitOfWork = new UnitOfWork(context);
         }
         // GET: Tweets
         public ActionResult Index()

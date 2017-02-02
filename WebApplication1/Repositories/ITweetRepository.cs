@@ -8,5 +8,6 @@ namespace WebApplication1.Repositories
         IEnumerable<Tweet> GetNewerTweets();
         IEnumerable<Tweet> Mine(string userId);
         void AddTweet(string content, string userId);
+        List<Tweet> GetTweetsByUsername(string username);
     }
 }

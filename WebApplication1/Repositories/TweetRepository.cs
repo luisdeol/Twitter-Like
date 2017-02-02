@@ -35,5 +35,13 @@ namespace WebApplication1.Repositories
             var tweet = new Tweet(content, userId);
             _context.Tweets.Add(tweet);
         }
+
+        public List<Tweet> GetTweetsByUsername(string username)
+        {
+            return _context.Tweets
+                .Where(t => t.User.UserName == username)
+                .Include(t => t.User)
+                .ToList();
+        }
     }
 }

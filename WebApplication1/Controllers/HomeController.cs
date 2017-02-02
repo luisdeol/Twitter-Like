@@ -1,23 +1,23 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Persistence;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
         public HomeController()
         {
-            _context = new ApplicationDbContext();
+            var context = new ApplicationDbContext();
+            _unitOfWork = new UnitOfWork(context);
         }
 
         [Authorize]
         public ActionResult Index()
         {
-            var tweets = _context.Tweets.Include(t => t.User).ToList();
+            var tweets = _unitOfWork.Tweets.GetNewerTweets();
             return RedirectToAction("Index", "Tweets", tweets);
         }
 
