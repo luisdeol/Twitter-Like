@@ -36,19 +36,17 @@ namespace WebApplication1.Controllers.Api
         }
 
         [HttpDelete]
-        public IHttpActionResult CancelRetweet(int tweetId)
+        public IHttpActionResult CancelRetweet(int id)
         {
             var identity = (ClaimsIdentity) User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
-
-            if (!_context.Activities.Any(a => a.TweetId == tweetId && 
-                                            a.UserId == userId &&
-                                            a.ActivityType == ActivityTypes.TweetRetweet))
+            var activity = _context.Activities.SingleOrDefault(a => a.TweetId == id &&
+                                                           a.UserId == userId &&
+                                                           a.ActivityType == ActivityTypes.TweetRetweet);
+            if (activity == null)
                 return BadRequest();
-
-            var activity = _context.Activities.Single(a => a.TweetId == tweetId && a.UserId == userId);
             _context.Activities.Remove(activity);
             _context.SaveChanges();
             return Ok();

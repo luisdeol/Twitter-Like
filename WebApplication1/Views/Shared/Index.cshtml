@@ -30,7 +30,7 @@
 }
 
 
-<table class="table">
+<table class="table" id="tweets">
     <tr>
         <th> Username </th>
         <th> Content </th>
@@ -67,61 +67,9 @@
 @section scripts {
     <script>
         $(document).ready(function() {
-            $('.js-retweet').click(function(e) {
-                var button = $(e.target);
-                if (button.hasClass('retweet')) {
-                    $.post('/api/retweets/', { TweetId: button.attr('data-tweet-id') })
-                        .done(function() {  
-                            button.text('Retweeted');
-                        })
-                        .fail(function() {
-                            alert("Something went wrong!");
-                        });
-                } else {
-                    $.ajax({
-                        url: 'api/retweets/' + button.attr('data-tweet-id'),
-                        method: 'DELETE'
-                    })
-                    .done(function() {
-                            button.text("Retweet");
-                        })
-                    .fail(function() {
-                            alert("Something went wrong!");
-                        });
-                }
-            });
-            $(".js-like").click(function(e) {
-                var button = $(e.target);
-                if (button.hasClass("liked")) {
-                    $.ajax({
-                            url: "/api/likes/" + button.attr("data-tweet-id"),
-                            method: "DELETE"
-                        })
-                        .done(function() {
-                            button.text("Like");
-                        }).fail(function() {
-                            alert("Something went wrong");
-                        });
-                } else {
-                    $.post("/api/likes", { TweetId: button.attr("data-tweet-id") })
-                        .done(function() {
-                            button.text("Liked");
-                        })
-                        .fail(function() {
-                            alert("Something went wrong!");
-                        });
-                }
-            });
-            $(".js-report").click(function (e) {
-                var button = $(e.target);
-                $.post("/api/reports", { TweetId: button.attr("data-tweet-id") })
-                        .done(function () {
-                            button.text("Reported");
-                        })
-                        .fail(function () {
-                            alert("Something went wrong!");
-                        });
-            });
+            RetweetsController.init("#tweets");
+            LikesController.init("#tweets");
+            ReportsController.init("#tweets");
         });
     </script>
 }

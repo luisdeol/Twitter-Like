@@ -11,7 +11,9 @@ namespace WebApplication1
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(                
-                    "~/Scripts/app/controllers/likesController.js"));
+                    "~/Scripts/app/controllers/likesController.js",
+                    "~/Scripts/app/controllers/retweetsController.js",
+                    "~/Scripts/app/controllers/reportsController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

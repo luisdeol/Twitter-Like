@@ -41,14 +41,11 @@ namespace WebApplication1.Controllers.Api
             IEnumerable<Claim> claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
-
-            if (!_context.Activities.Any(a => a.TweetId == id &&
-                                             a.UserId == userId &&
-                                             a.ActivityType == ActivityTypes.TweetReport))
+            var activity = _context.Activities.SingleOrDefault(a => a.TweetId == id &&
+                                                                    a.UserId == userId &&
+                                                                    a.ActivityType == ActivityTypes.TweetReport);
+            if (activity == null)
                 return BadRequest();
-            var activity = _context.Activities.Single(a=> a.TweetId == id &&
-                                             a.UserId == userId &&
-                                             a.ActivityType == ActivityTypes.TweetReport);
             _context.Activities.Remove(activity);
             _context.SaveChanges();
             return Ok();
