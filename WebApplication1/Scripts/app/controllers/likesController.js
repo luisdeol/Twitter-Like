@@ -1,4 +1,4 @@
-﻿var LikesController = function() {
+﻿var LikesController = function(likeService) {
 
     var button;
 
@@ -8,28 +8,22 @@
     var giveLike = function(e) {
         button = $(e.target);
         var tweetId = button.attr("data-tweet-id");
-        if (button.hasClass("liked")) {
-            $.ajax({
-                    url: "/api/likes/" + tweetId ,
-                    method: "DELETE"
-                })
-                .done(function() {
-                    button.text("Like").removeClass("liked").addClass("like");
-                })
-                .fail(function () {
-                    alert("Something went wrong");
-                });
-        } else {
-            $.post("/api/likes", { TweetId: tweetId })
-                .done(function() {
-                    button.text("Liked").removeClass("like").addClass("liked");
-                })
-                .fail(function() {
-                    alert("Something went wrong!");
-                });
-        }
-    }
+        if (button.hasClass("liked"))
+            likeService.cancelLike(tweetId, done, fail);
+        else
+            likeService.like(tweetId, done, fail);
+    };
+
+    var done = function() {
+        var text = (button.text === "Liked") ? "Like" : "Liked";
+        button.toggleClass("liked").toggleClass("like").text(text);
+    };
+
+    var fail = function() {
+        alert("Something went wrong!");
+    };
+
     return {
         init: init
     }
-}();
+}(LikeService);

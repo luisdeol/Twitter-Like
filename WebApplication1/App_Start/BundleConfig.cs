@@ -10,7 +10,9 @@ namespace WebApplication1
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app").Include(                
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                    "~/Scripts/app/services/retweetService.js",
+                    "~/Scripts/app/services/likeService.js",
                     "~/Scripts/app/controllers/likesController.js",
                     "~/Scripts/app/controllers/retweetsController.js",
                     "~/Scripts/app/controllers/reportsController.js"));

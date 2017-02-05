@@ -1,3 +1,5 @@
 *.mdf
 *.ldf
 Debug/
+bin/
+obj/

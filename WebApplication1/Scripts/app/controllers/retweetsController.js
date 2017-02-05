@@ -1,4 +1,4 @@
-﻿var RetweetsController = function() {
+﻿var RetweetsController = function(retweetService) {
     var button;
 
     var init = function(container) {
@@ -8,28 +8,22 @@
     var retweet = function(e) {
         button = $(e.target);
         var tweetId = button.attr("data-tweet-id");
-        if (button.hasClass("retweeted")) {
-            $.ajax({
-                    url: '/api/retweets/' + tweetId,
-                    method: 'DELETE'
-                })
-                .done(function () {
-                    button.text("Retweet").removeClass("retweeted").addClass("retweet");;
-                })
-                .fail(function () {
-                    alert("Something went wrong!");
-                });
-        } else {
-            $.post('/api/retweets/', { TweetId: tweetId })
-                .done(function () {
-                    button.text('Retweeted').removeClass("retweet").addClass("retweeted");;
-                })
-                .fail(function () {
-                    alert("Something went wrong!");
-                });
-        }
+        if (button.hasClass("retweeted"))
+            retweetService.cancelRetweet(tweetId, done, fail);
+        else
+            retweetService.retweet(tweetId, done, fail);
     };
+
+    var done = function() {
+        var text = (button.text === "Retweeted") ? "Retweet" : 'Retweeted';
+        button.toggleClass("retweeted").toggleClass("retweet").text(text);
+    };
+
+    var fail = function() {
+        alert("Something went wrong!");
+    };
+
     return {
         init: init
     }
-}();
+}(RetweetService);

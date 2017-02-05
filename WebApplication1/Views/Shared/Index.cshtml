@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TweetFormViewModel.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TweetFormViewModel.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.TweetFormViewModel.Content, new { @class = "form-control", rows = "5", style = "width: 100%; max-width:70%;"})
                 @Html.ValidationMessageFor(model => model.TweetFormViewModel.Content, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -48,7 +48,7 @@
                 @if (Model.IsAuthenticated)
                 {
                     <td>
-                        <a href="#"> Reply </a>
+                        <button class="btn btn-link js-reply" data-username="@tweet.User.UserName" data-tweet-id="@tweet.Id"> Reply </button>
                         <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-tweet-id="@tweet.Id">
                             @(Model.Retweets.Contains(@tweet.Id) ? "Retweeted" : "Retweet")
                         </button>
@@ -70,6 +70,32 @@
             RetweetsController.init("#tweets");
             LikesController.init("#tweets");
             ReportsController.init("#tweets");
+            $(".js-reply").click(function(e) {
+                var button = $(e.target);
+                bootbox.dialog({
+                    title: "Reply to " + button.attr("data-username") + "'s tweet",
+                    message: "<textarea class = 'form-control' style='min-width: 100%;' rows='5'></textarea>",
+                    buttons: {
+                        no: {
+                            label: 'Cancel',
+                            className: 'btn-default',
+                            callback: function() {
+                                bootbox.hideAll();
+                            }
+                        },
+                        yes: {
+                            label: 'Reply',
+                            className: 'btn-info',
+                            callback: function() {
+                                $.post('/api/replies/', { TweetId: button.attr("data-tweet-id") })
+                                    .done(function(response){console.log(response);})
+                                    .fail();
+                            }
+                        }
+                    }
+                });
+
+            });
         });
     </script>
 }
