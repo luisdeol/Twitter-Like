@@ -42,20 +42,20 @@
         if (!Model.Reports.Contains(@tweet.Id))
         {
             <tr>
-                <td><a href="@Url.Action("ShowProfile", "Profiles", new { username = @tweet.User.UserName })"> @tweet.User.UserName </a></td>
+                <td><a href="@Url.Action("ShowProfile", "Profiles", new { username = @tweet.User.Name })"> @tweet.User.Name </a></td>
                 <td> @tweet.Content </td>
                 <td> @tweet.CreatedAt.ToString("g")</td>
                 @if (Model.IsAuthenticated)
                 {
                     <td>
-                        <button class="btn btn-link js-reply" data-username="@tweet.User.UserName" data-tweet-id="@tweet.Id"> Reply </button>
+                        <button class="btn btn-link js-reply" data-username="@tweet.User.Name" data-tweet-id="@tweet.Id"> Reply </button>
                         <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-tweet-id="@tweet.Id">
                             @(Model.Retweets.Contains(@tweet.Id) ? "Retweeted" : "Retweet")
                         </button>
                         <button class="btn btn-link js-like @(Model.Likes.Contains(@tweet.Id) ? "liked" : "like") " data-tweet-id="@tweet.Id">
                             @(Model.Likes.Contains(@tweet.Id) ? "Liked" : "Like")
                         </button>
-                        <button class="btn btn-link js-report" data-tweet-id="@tweet.Id">
+                        <button class="btn btn-link js-report" data-username="@tweet.User.Name" data-tweet-id="@tweet.Id">
                             Report
                         </button>
                     </td>

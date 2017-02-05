@@ -39,7 +39,7 @@ namespace WebApplication1.Repositories
         public List<Tweet> GetTweetsByUsername(string username)
         {
             return _context.Tweets
-                .Where(t => t.User.UserName == username)
+                .Where(t => t.User.Name == username)
                 .Include(t => t.User)
                 .ToList();
         }

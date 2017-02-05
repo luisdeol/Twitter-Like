@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201701291712448_AddActivity.Designer.cs">
       <DependentUpon>201701291712448_AddActivity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702052303482_ExtendingApplicationUser.cs" />
+    <Compile Include="Migrations\201702052303482_ExtendingApplicationUser.Designer.cs">
+      <DependentUpon>201702052303482_ExtendingApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityTypes.cs" />
@@ -253,6 +257,7 @@
     <Compile Include="ViewModels\TweetsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -361,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701291712448_AddActivity.resx">
       <DependentUpon>201701291712448_AddActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702052303482_ExtendingApplicationUser.resx">
+      <DependentUpon>201702052303482_ExtendingApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -81,7 +81,7 @@ namespace WebApplication1.Models
 
         [Required]
         [StringLength(150)]
-        public string Username { get; set; }
+        public string Name { get; set; }
     }
 
     public class ResetPasswordViewModel
