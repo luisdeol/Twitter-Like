@@ -74,7 +74,8 @@
                 var button = $(e.target);
                 bootbox.dialog({
                     title: "Reply to " + button.attr("data-username") + "'s tweet",
-                    message: "<textarea class = 'form-control' style='min-width: 100%;' rows='5'></textarea>",
+                    message:
+                        "<textarea class = 'form-control content' id='reply-content' style='min-width: 100%;' rows='5'></textarea>",
                     buttons: {
                         no: {
                             label: 'Cancel',
@@ -87,15 +88,22 @@
                             label: 'Reply',
                             className: 'btn-info',
                             callback: function() {
-                                $.post('/api/replies/', { TweetId: button.attr("data-tweet-id") })
-                                    .done(function(response){console.log(response);})
-                                    .fail();
-                            }
-                        }
-                    }
-                });
-
-            });
+                                    $.ajax({
+                                        url: "/api/replies/",
+                                        type: "POST",
+                                        data: JSON.stringify({
+                                            TweetId: button.attr("data-tweet-id"),
+                                            ReplyContent: $("#reply-content").val()
+                                        }),
+                                        contentType: "application/json; charset=utf-8"
+                                    })
+                                .done(function(response) { console.log(response); })
+                                .fail();
+            }
+        }
+        }
         });
+        });
+    });
     </script>
 }

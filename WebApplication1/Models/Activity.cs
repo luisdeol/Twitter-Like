@@ -17,6 +17,8 @@ namespace WebApplication1.Models
         [Column(Order = 3)]
         public ActivityTypes ActivityType { get; set; }
 
+        public string Content { get; set; }
+
         public ApplicationUser User { get; set; }
         public Tweet Tweet { get; set; }
 
@@ -25,11 +27,12 @@ namespace WebApplication1.Models
             
         }
 
-        public Activity(string userId, int tweetId, ActivityTypes type)
+        public Activity(string userId, int tweetId, ActivityTypes type, string content = "")
         {
             UserId = userId;
             TweetId = tweetId;
             ActivityType = type;
+            Content = content;
         }
     }
 }
