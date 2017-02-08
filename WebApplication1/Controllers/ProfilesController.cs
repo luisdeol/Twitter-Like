@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
         // GET: Profiles
         public ActionResult ShowProfile(string username)
         {
-            string userId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
 
             var tweets = _unitOfWork.Tweets.GetTweetsByUsername(username);
 
@@ -35,9 +35,11 @@ namespace WebApplication1.Controllers
             return View("Profile", viewModel);
         }
 
-        public ActionResult Search()
+        [HttpPost]
+        public ActionResult Search(string searchQuery=null)
         {
-            throw new System.NotImplementedException();
+            var users = _unitOfWork.Users.GetUsers(searchQuery);
+            return View(users);
         }
     }
 }

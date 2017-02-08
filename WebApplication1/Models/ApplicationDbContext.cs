@@ -12,6 +12,7 @@ namespace WebApplication1.Models
 
         public DbSet<Tweet> Tweets { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<MyUserInfo> MyUserInfos { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -21,6 +22,10 @@ namespace WebApplication1.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<IdentityUser>()
+                .ToTable("Users");
+            modelBuilder.Entity<ApplicationUser>()
+                .ToTable("Users");
         }
 
     }

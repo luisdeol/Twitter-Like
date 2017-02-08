@@ -195,58 +195,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701190116437_InitialMigration.cs" />
-    <Compile Include="Migrations\201701190116437_InitialMigration.Designer.cs">
-      <DependentUpon>201701190116437_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701190119098_AddTweets.cs" />
-    <Compile Include="Migrations\201701190119098_AddTweets.Designer.cs">
-      <DependentUpon>201701190119098_AddTweets.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701191332205_Like.cs" />
-    <Compile Include="Migrations\201701191332205_Like.Designer.cs">
-      <DependentUpon>201701191332205_Like.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701211328080_DesperateTryCollectionsToTweet.cs" />
-    <Compile Include="Migrations\201701211328080_DesperateTryCollectionsToTweet.Designer.cs">
-      <DependentUpon>201701211328080_DesperateTryCollectionsToTweet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701211431318_JesusSaveMe.cs" />
-    <Compile Include="Migrations\201701211431318_JesusSaveMe.Designer.cs">
-      <DependentUpon>201701211431318_JesusSaveMe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701250056451_ExtendingUserIdentity.cs" />
-    <Compile Include="Migrations\201701250056451_ExtendingUserIdentity.Designer.cs">
-      <DependentUpon>201701250056451_ExtendingUserIdentity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701250105584_UserName.cs" />
-    <Compile Include="Migrations\201701250105584_UserName.Designer.cs">
-      <DependentUpon>201701250105584_UserName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701271718539_AddActivityClassAndTypes.cs" />
-    <Compile Include="Migrations\201701271718539_AddActivityClassAndTypes.Designer.cs">
-      <DependentUpon>201701271718539_AddActivityClassAndTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701291712448_AddActivity.cs" />
-    <Compile Include="Migrations\201701291712448_AddActivity.Designer.cs">
-      <DependentUpon>201701291712448_AddActivity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702052303482_ExtendingApplicationUser.cs" />
-    <Compile Include="Migrations\201702052303482_ExtendingApplicationUser.Designer.cs">
-      <DependentUpon>201702052303482_ExtendingApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702070121525_AddOptionalContentFieldToActivty.cs" />
-    <Compile Include="Migrations\201702070121525_AddOptionalContentFieldToActivty.Designer.cs">
-      <DependentUpon>201702070121525_AddOptionalContentFieldToActivty.cs</DependentUpon>
+    <Compile Include="Migrations\201702081829310_RezaADeusUsers.cs" />
+    <Compile Include="Migrations\201702081829310_RezaADeusUsers.Designer.cs">
+      <DependentUpon>201702081829310_RezaADeusUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityTypes.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IApplicationDbContext.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MyUserInfo.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Persistence\IUnitOfWork.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -254,9 +215,12 @@
     <Compile Include="Repositories\ActivityRepository.cs" />
     <Compile Include="Repositories\IActivityRepository.cs" />
     <Compile Include="Repositories\ITweetRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\TweetRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\TweetFormViewModel.cs" />
     <Compile Include="ViewModels\TweetsViewModel.cs" />
   </ItemGroup>
@@ -332,6 +296,7 @@
     <Content Include="Views\Tweets\Mine.cshtml" />
     <Content Include="Views\Shared\MyActivities.cshtml" />
     <Content Include="Views\Profiles\Profile.cshtml" />
+    <Content Include="Views\Profiles\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,38 +311,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701190116437_InitialMigration.resx">
-      <DependentUpon>201701190116437_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701190119098_AddTweets.resx">
-      <DependentUpon>201701190119098_AddTweets.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701191332205_Like.resx">
-      <DependentUpon>201701191332205_Like.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701211328080_DesperateTryCollectionsToTweet.resx">
-      <DependentUpon>201701211328080_DesperateTryCollectionsToTweet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701211431318_JesusSaveMe.resx">
-      <DependentUpon>201701211431318_JesusSaveMe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701250056451_ExtendingUserIdentity.resx">
-      <DependentUpon>201701250056451_ExtendingUserIdentity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701250105584_UserName.resx">
-      <DependentUpon>201701250105584_UserName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701271718539_AddActivityClassAndTypes.resx">
-      <DependentUpon>201701271718539_AddActivityClassAndTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701291712448_AddActivity.resx">
-      <DependentUpon>201701291712448_AddActivity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702052303482_ExtendingApplicationUser.resx">
-      <DependentUpon>201702052303482_ExtendingApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702070121525_AddOptionalContentFieldToActivty.resx">
-      <DependentUpon>201702070121525_AddOptionalContentFieldToActivty.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702081829310_RezaADeusUsers.resx">
+      <DependentUpon>201702081829310_RezaADeusUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
