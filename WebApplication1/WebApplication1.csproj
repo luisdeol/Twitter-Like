@@ -269,9 +269,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\controllers\likesController.js" />
+    <Content Include="Scripts\app\controllers\replyController.js" />
     <Content Include="Scripts\app\controllers\reportsController.js" />
     <Content Include="Scripts\app\controllers\retweetsController.js" />
     <Content Include="Scripts\app\services\likeService.js" />
+    <Content Include="Scripts\app\services\replyService.js" />
     <Content Include="Scripts\app\services\reportsService.js" />
     <Content Include="Scripts\app\services\retweetService.js" />
     <Content Include="Scripts\bootbox.min.js" />

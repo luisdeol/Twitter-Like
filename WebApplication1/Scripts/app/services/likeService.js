@@ -6,14 +6,14 @@
     };
     var cancelLike = function(tweetId, done, fail) {
         $.ajax({
-                url: "/api/likes/"+tweetId,
+                url: "/api/likes/" + tweetId,
                 method: "DELETE"
             })
             .done(done)
             .fail(fail);
-    }
+    };
     return {
         like: like,
         cancelLike: cancelLike
-    }
+    };
 }();

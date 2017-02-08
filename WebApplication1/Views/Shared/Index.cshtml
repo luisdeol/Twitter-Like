@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TweetFormViewModel.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.TweetFormViewModel.Content, new { @class = "form-control", rows = "5", style = "width: 100%; max-width:70%;"})
+                @Html.TextAreaFor(model => model.TweetFormViewModel.Content, new { @class = "form-control", rows = "5", style = "width: 100%; max-width:70%; resize: none;"})
                 @Html.ValidationMessageFor(model => model.TweetFormViewModel.Content, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -70,40 +70,7 @@
             RetweetsController.init("#tweets");
             LikesController.init("#tweets");
             ReportsController.init("#tweets");
-            $(".js-reply").click(function(e) {
-                var button = $(e.target);
-                bootbox.dialog({
-                    title: "Reply to " + button.attr("data-username") + "'s tweet",
-                    message:
-                        "<textarea class = 'form-control content' id='reply-content' style='min-width: 100%;' rows='5'></textarea>",
-                    buttons: {
-                        no: {
-                            label: 'Cancel',
-                            className: 'btn-default',
-                            callback: function() {
-                                bootbox.hideAll();
-                            }
-                        },
-                        yes: {
-                            label: 'Reply',
-                            className: 'btn-info',
-                            callback: function() {
-                                    $.ajax({
-                                        url: "/api/replies/",
-                                        type: "POST",
-                                        data: JSON.stringify({
-                                            TweetId: button.attr("data-tweet-id"),
-                                            ReplyContent: $("#reply-content").val()
-                                        }),
-                                        contentType: "application/json; charset=utf-8"
-                                    })
-                                .done(function(response) { console.log(response); })
-                                .fail();
-            }
-        }
-        }
+            ReplyController.init("#tweets");
         });
-        });
-    });
     </script>
 }

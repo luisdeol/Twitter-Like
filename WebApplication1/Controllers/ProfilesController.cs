@@ -34,5 +34,10 @@ namespace WebApplication1.Controllers
             };
             return View("Profile", viewModel);
         }
+
+        public ActionResult Search()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
