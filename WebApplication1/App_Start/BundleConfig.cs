@@ -33,7 +33,7 @@ namespace WebApplication1
                       "~/Scripts/bootbox.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/Site.css",
                       "~/Content/animate.css"));
         }

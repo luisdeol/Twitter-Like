@@ -6,9 +6,6 @@
 
 <h2>View</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -19,7 +16,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Username)
+            <a href="@Url.Action("ShowProfile", "Profiles", new {username = item.Username})">
+                @item.Username
+            </a>
         </td>
     </tr>
 }
