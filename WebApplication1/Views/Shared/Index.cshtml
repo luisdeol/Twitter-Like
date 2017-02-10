@@ -42,7 +42,14 @@
         if (!Model.Reports.Contains(@tweet.Id))
         {
             <tr>
-                <td><a href="@Url.Action("ShowProfile", "Profiles", new { username = @tweet.User.Name })"> @tweet.User.Name </a></td>
+                <td>
+                    <a href="@Url.Action("ShowProfile", "Profiles", new {username = @tweet.User.Name})">
+                        @tweet.User.Name
+                    </a>
+                    <button class="btn btn-link js-follow @(Model.Followings.Contains(@tweet.UserId) ? "following" : "follow")" followee-id="@tweet.UserId">
+                        @(Model.Followings.Contains(@tweet.UserId) ? "Following" : "Follow")
+                    </button>
+                </td>
                 <td> @tweet.Content </td>
                 <td> @tweet.CreatedAt.ToString("g")</td>
                 @if (Model.IsAuthenticated)
@@ -71,6 +78,30 @@
             LikesController.init("#tweets");
             ReportsController.init("#tweets");
             ReplyController.init("#tweets");
+            $(".js-follow").click(function(e) {
+                var button = $(e.target);
+                if (button.hasClass("follow")) {
+                    $.post("/api/followings/", { FolloweeId: button.attr("followee-id") })
+                        .done(function() {
+                            button.text("Following");
+                            button.toggleClass("following").toggleClass("follow");
+                        })
+                        .fail(function() {
+                            alert("Something went wrong!");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/followings/"+button.attr("followee-id"),
+                        type: "DELETE"
+                        })
+                        .done(function() {
+                            button.text("Follow");
+                            button.toggleClass("following").toggleClass("follow");
+                        }).fail(function() {
+                            alert("Something went wrong!");
+                        });
+                }
+            });
         });
     </script>
 }

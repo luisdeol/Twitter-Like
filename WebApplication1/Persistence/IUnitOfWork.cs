@@ -7,6 +7,7 @@ namespace WebApplication1.Persistence
         ITweetRepository Tweets { get; set; }
         IActivityRepository Activities { get; set; }
         IUserRepository Users { get; set; }
+        IFollowingRepository Followings { get; set; }
         void Complete();
     }
 }

@@ -8,14 +8,16 @@
     var giveLike = function(e) {
         button = $(e.target);
         var tweetId = button.attr("data-tweet-id");
-        if (button.hasClass("liked"))
-            likeService.cancelLike(tweetId, done, fail);
-        else
+
+        if (button.hasClass("like"))
             likeService.like(tweetId, done, fail);
+        else
+            likeService.cancelLike(tweetId, done, fail);
     };
 
     var done = function() {
-        var text = (button.text === "Liked") ? "Like" : "Liked";
+        var text = (button.text() == "Liked") ? "Like" : "Liked";
+
         button.toggleClass("liked").toggleClass("like").text(text);
     };
 

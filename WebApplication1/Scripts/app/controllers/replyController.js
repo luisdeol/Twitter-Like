@@ -20,12 +20,23 @@
                 yes: {
                     label: "Reply",
                     className: "btn-info",
-                    callback: replyService.createReply(button.attr("data-tweet-id"),
-                        $("#reply-content").val(), done, fail)
+                    callback: function () {
+                        $.ajax({
+                            url: "/api/replies/",
+                            type: "POST",
+                            data: JSON.stringify({ TweetId: button.attr("data-tweet-id"), ReplyContent: $("#reply-content").val() }),
+                            contentType: "application/json"
+                        })
+                        .done(function(){})
+                        .fail(function(){});
+                        //replyService.createReply(100,
+                        //$("#reply-content").val(), done, fail);
+                    }
                     }
                 }
         });
     };
+
     var done = function() {
     };
     var fail = function() {

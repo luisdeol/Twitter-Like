@@ -8,14 +8,15 @@
     var retweet = function(e) {
         button = $(e.target);
         var tweetId = button.attr("data-tweet-id");
-        if (button.hasClass("retweeted"))
-            retweetService.cancelRetweet(tweetId, done, fail);
-        else
+        if (button.hasClass("retweet"))
             retweetService.retweet(tweetId, done, fail);
+        else
+            retweetService.cancelRetweet(tweetId, done, fail);
+
     };
 
     var done = function() {
-        var text = (button.text === "Retweeted") ? "Retweet" : 'Retweeted';
+        var text = (button.text() == "Retweeted") ? "Retweet" : "Retweeted";
         button.toggleClass("retweeted").toggleClass("retweet").text(text);
     };
 

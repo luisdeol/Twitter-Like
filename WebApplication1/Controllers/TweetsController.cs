@@ -20,20 +20,21 @@ namespace WebApplication1.Controllers
         {
             var tweets = _unitOfWork.Tweets.GetNewerTweets();
 
-            string userId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
 
             var likes = _unitOfWork.Activities.GetLookupLikes(userId);
             var retweets = _unitOfWork.Activities.GetLookupRetweets(userId);
             var reports = _unitOfWork.Activities.GetLookupReports(userId);
-
-            TweetsViewModel tvm = new TweetsViewModel
+            var followings = _unitOfWork.Followings.GetLookupFollowings(userId);
+            var tvm = new TweetsViewModel
             {
                 Tweets = tweets,
                 IsAuthenticated = User.Identity.IsAuthenticated,
                 TweetFormViewModel =  new TweetFormViewModel(),
                 Likes = likes,
                 Retweets =  retweets,
-                Reports = reports
+                Reports = reports,
+                Followings = followings
             };
             return View(tvm);
         }

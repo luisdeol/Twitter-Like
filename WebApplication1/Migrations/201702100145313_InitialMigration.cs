@@ -3,7 +3,7 @@ namespace WebApplication1.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class RezaADeusUsers : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -18,7 +18,7 @@ namespace WebApplication1.Migrations
                     })
                 .PrimaryKey(t => new { t.UserId, t.TweetId, t.ActivityType })
                 .ForeignKey("dbo.Tweets", t => t.TweetId, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.TweetId);
             
@@ -32,7 +32,7 @@ namespace WebApplication1.Migrations
                         UserId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Users", t => t.UserId)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId);
             
             CreateTable(
@@ -51,14 +51,9 @@ namespace WebApplication1.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
-                        Name = c.String(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
-                        MyUserInfo_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.MyUserInfoes", t => t.MyUserInfo_Id)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
-                .Index(t => t.MyUserInfo_Id);
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -73,6 +68,19 @@ namespace WebApplication1.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Users", t => t.IdentityUser_Id)
                 .Index(t => t.IdentityUser_Id);
+            
+            CreateTable(
+                "dbo.Followings",
+                c => new
+                    {
+                        FolloweeId = c.String(nullable: false, maxLength: 128),
+                        FollowerId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.FolloweeId, t.FollowerId })
+                .ForeignKey("dbo.AspNetUsers", t => t.FollowerId)
+                .ForeignKey("dbo.AspNetUsers", t => t.FolloweeId)
+                .Index(t => t.FolloweeId)
+                .Index(t => t.FollowerId);
             
             CreateTable(
                 "dbo.AspNetUserLogins",
@@ -120,32 +128,54 @@ namespace WebApplication1.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
+            CreateTable(
+                "dbo.AspNetUsers",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        MyUserInfo_Id = c.Int(),
+                        Name = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Users", t => t.Id)
+                .ForeignKey("dbo.MyUserInfoes", t => t.MyUserInfo_Id)
+                .Index(t => t.Id)
+                .Index(t => t.MyUserInfo_Id);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.AspNetUsers", "MyUserInfo_Id", "dbo.MyUserInfoes");
+            DropForeignKey("dbo.AspNetUsers", "Id", "dbo.Users");
             DropForeignKey("dbo.AspNetUserRoles", "IdentityUser_Id", "dbo.Users");
             DropForeignKey("dbo.AspNetUserLogins", "IdentityUser_Id", "dbo.Users");
             DropForeignKey("dbo.AspNetUserClaims", "IdentityUser_Id", "dbo.Users");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Activities", "UserId", "dbo.Users");
-            DropForeignKey("dbo.Tweets", "UserId", "dbo.Users");
-            DropForeignKey("dbo.Users", "MyUserInfo_Id", "dbo.MyUserInfoes");
+            DropForeignKey("dbo.Activities", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Tweets", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Followings", "FolloweeId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Followings", "FollowerId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Activities", "TweetId", "dbo.Tweets");
+            DropIndex("dbo.AspNetUsers", new[] { "MyUserInfo_Id" });
+            DropIndex("dbo.AspNetUsers", new[] { "Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "IdentityUser_Id" });
+            DropIndex("dbo.Followings", new[] { "FollowerId" });
+            DropIndex("dbo.Followings", new[] { "FolloweeId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "IdentityUser_Id" });
-            DropIndex("dbo.Users", new[] { "MyUserInfo_Id" });
             DropIndex("dbo.Users", "UserNameIndex");
             DropIndex("dbo.Tweets", new[] { "UserId" });
             DropIndex("dbo.Activities", new[] { "TweetId" });
             DropIndex("dbo.Activities", new[] { "UserId" });
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.MyUserInfoes");
             DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.Followings");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.Users");
             DropTable("dbo.Tweets");

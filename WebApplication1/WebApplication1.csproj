@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\FollowingsController.cs" />
     <Compile Include="Controllers\Api\LikesController.cs" />
     <Compile Include="Controllers\Api\RepliesController.cs" />
     <Compile Include="Controllers\Api\ReportsController.cs" />
@@ -191,18 +192,20 @@
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Dtos\ActivityDto.cs" />
+    <Compile Include="Dtos\FollowDto.cs" />
     <Compile Include="Dtos\ReplyDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702081829310_RezaADeusUsers.cs" />
-    <Compile Include="Migrations\201702081829310_RezaADeusUsers.Designer.cs">
-      <DependentUpon>201702081829310_RezaADeusUsers.cs</DependentUpon>
+    <Compile Include="Migrations\201702100145313_InitialMigration.cs" />
+    <Compile Include="Migrations\201702100145313_InitialMigration.Designer.cs">
+      <DependentUpon>201702100145313_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActivityTypes.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Following.cs" />
     <Compile Include="Models\IApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Activity.cs" />
@@ -213,14 +216,15 @@
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ActivityRepository.cs" />
+    <Compile Include="Repositories\FollowingRepository.cs" />
     <Compile Include="Repositories\IActivityRepository.cs" />
+    <Compile Include="Repositories\IFollowingRepository.cs" />
     <Compile Include="Repositories\ITweetRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\TweetRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
-    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\TweetFormViewModel.cs" />
     <Compile Include="ViewModels\TweetsViewModel.cs" />
   </ItemGroup>
@@ -311,8 +315,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702081829310_RezaADeusUsers.resx">
-      <DependentUpon>201702081829310_RezaADeusUsers.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702100145313_InitialMigration.resx">
+      <DependentUpon>201702100145313_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
