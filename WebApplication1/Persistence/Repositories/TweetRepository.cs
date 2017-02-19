@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using WebApplication1.Models;
+using WebApplication1.Core.Models;
+using WebApplication1.Core.Repositories;
 
-namespace WebApplication1.Repositories
+namespace WebApplication1.Persistence.Repositories
 {
     public class TweetRepository : ITweetRepository
     {
-        private readonly IApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public TweetRepository(IApplicationDbContext context)
+        public TweetRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Tweet> GetNewerTweets()
+        public IEnumerable<Tweet> GetNewerTweets(string userId)
         {
-            
             return _context.Tweets
                 .Include(t=> t.User)
                 .OrderByDescending(t => t.CreatedAt)
@@ -36,10 +36,10 @@ namespace WebApplication1.Repositories
             _context.Tweets.Add(tweet);
         }
 
-        public List<Tweet> GetTweetsByUsername(string username)
+        public List<Tweet> GetTweetsByUsername(string userId)
         {
             return _context.Tweets
-                .Where(t => t.User.Name == username)
+                .Where(t => t.UserId == userId)
                 .Include(t => t.User)
                 .ToList();
         }

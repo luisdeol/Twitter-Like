@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Core.Models
 {
     public interface IApplicationDbContext
     {

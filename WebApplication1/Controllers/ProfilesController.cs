@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
+using System.Linq;
 using System.Web.Mvc;
-using WebApplication1.Models;
+using WebApplication1.Core;
+using WebApplication1.Core.ViewModels;
 using WebApplication1.Persistence;
-using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -17,20 +18,23 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Profiles
-        public ActionResult ShowProfile(string username)
+        public ActionResult ShowProfile(string visitUserId)
         {
             var userId = User.Identity.GetUserId();
 
-            var tweets = _unitOfWork.Tweets.GetTweetsByUsername(username);
+            var tweets = _unitOfWork.Tweets.GetTweetsByUsername(visitUserId);
+            var userName = tweets?.First().User.Name;
+            var retweetedTweets = _unitOfWork.Activities.GetRetweetedTweets(visitUserId);
 
-            var retweetedTweets = _unitOfWork.Activities.GetRetweetedTweets(userId);
+            tweets?.AddRange(retweetedTweets);
 
-            tweets.AddRange(retweetedTweets);
-
+            var isFollowing = _unitOfWork.Followings.GetIsFollowing(userId, userName);
             var viewModel = new ProfileViewModel
             {
-                ProfileUser = username,
-                Tweets = tweets
+                ProfileUsername = userName,
+                UserId = visitUserId,
+                Tweets = tweets,
+                IsFollowing = isFollowing
             };
             return View("Profile", viewModel);
         }

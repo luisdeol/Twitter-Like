@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using System.Web.Mvc;
-using WebApplication1.Models;
+using WebApplication1.Core;
+using WebApplication1.Core.ViewModels;
 using WebApplication1.Persistence;
-using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -18,10 +18,9 @@ namespace WebApplication1.Controllers
         // GET: Tweets
         public ActionResult Index()
         {
-            var tweets = _unitOfWork.Tweets.GetNewerTweets();
 
             var userId = User.Identity.GetUserId();
-
+            var tweets = _unitOfWork.Tweets.GetNewerTweets(userId);
             var likes = _unitOfWork.Activities.GetLookupLikes(userId);
             var retweets = _unitOfWork.Activities.GetLookupRetweets(userId);
             var reports = _unitOfWork.Activities.GetLookupReports(userId);

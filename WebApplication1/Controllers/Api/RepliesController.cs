@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
-using WebApplication1.Dtos;
-using WebApplication1.Models;
+using WebApplication1.Core.Dtos;
+using WebApplication1.Core.Models;
+using WebApplication1.Persistence;
 
 namespace WebApplication1.Controllers.Api
 {

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using WebApplication1.Models;
+using WebApplication1.Core.Models;
 
 namespace WebApplication1.Controllers
 {

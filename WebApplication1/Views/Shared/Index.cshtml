@@ -1,4 +1,4 @@
-﻿@model WebApplication1.ViewModels.TweetsViewModel
+﻿@model WebApplication1.Core.ViewModels.TweetsViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -43,7 +43,7 @@
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("ShowProfile", "Profiles", new {username = @tweet.User.Name})">
+                    <a href="@Url.Action("ShowProfile", "Profiles", new {visitUserId = @tweet.UserId})">
                         @tweet.User.Name
                     </a>
                     <button class="btn btn-link js-follow @(Model.Followings.Contains(@tweet.UserId) ? "following" : "follow")" followee-id="@tweet.UserId">

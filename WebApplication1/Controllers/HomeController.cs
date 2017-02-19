@@ -1,5 +1,6 @@
-﻿using System.Web.Mvc;
-using WebApplication1.Models;
+﻿using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
+using WebApplication1.Core;
 using WebApplication1.Persistence;
 
 namespace WebApplication1.Controllers
@@ -17,7 +18,8 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var tweets = _unitOfWork.Tweets.GetNewerTweets();
+            var userId = User.Identity.GetUserId();
+            var tweets = _unitOfWork.Tweets.GetNewerTweets(userId);
             return RedirectToAction("Index", "Tweets", tweets);
         }
 

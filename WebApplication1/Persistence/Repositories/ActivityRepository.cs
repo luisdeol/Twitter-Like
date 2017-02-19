@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using WebApplication1.Models;
+using WebApplication1.Core.Models;
+using WebApplication1.Core.Repositories;
 
-namespace WebApplication1.Repositories
+namespace WebApplication1.Persistence.Repositories
 {
     public class ActivityRepository : IActivityRepository
     {

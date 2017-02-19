@@ -1,7 +1,8 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using WebApplication1.Core.Models;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Persistence
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {

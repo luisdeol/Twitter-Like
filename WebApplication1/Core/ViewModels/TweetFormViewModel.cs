@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.ViewModels
+﻿namespace WebApplication1.Core.ViewModels
 {
     public class TweetFormViewModel
     {

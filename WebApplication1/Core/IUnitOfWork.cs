@@ -1,6 +1,6 @@
-using WebApplication1.Repositories;
+using WebApplication1.Core.Repositories;
 
-namespace WebApplication1.Persistence
+namespace WebApplication1.Core
 {
     public interface IUnitOfWork
     {

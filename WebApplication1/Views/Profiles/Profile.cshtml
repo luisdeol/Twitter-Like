@@ -1,15 +1,18 @@
-﻿@model WebApplication1.ViewModels.ProfileViewModel
+﻿@model WebApplication1.Core.ViewModels.ProfileViewModel
 
 @{
     ViewBag.Title = "Profile";
 }
 
-<h2> @Model.ProfileUser Profile </h2>
+<h2> @Model.ProfileUsername Profile </h2>
 
 <table class="table">
     <tr>
         <th>
             UserName
+            <button class="btn btn-link js-follow @(Model.IsFollowing ? "following" : "follow")" followee-id="@Model.UserId">
+                @(Model.IsFollowing ? "Following" : "Follow")
+            </button>
         </th>
         <th>
             Content
@@ -33,3 +36,33 @@
         </tr>
     }
 </table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".js-follow").click(function (e) {
+                var button = $(e.target);
+                if (button.hasClass("follow")) {
+                    $.post("/api/followings/", { FolloweeId: button.attr("followee-id") })
+                        .done(function () {
+                            button.text("Following");
+                            button.toggleClass("following").toggleClass("follow");
+                        })
+                        .fail(function () {
+                            alert("Something went wrong!");
+                        });
+                } else {
+                    $.ajax({
+                        url: "/api/followings/" + button.attr("followee-id"),
+                        type: "DELETE"
+                    })
+                        .done(function () {
+                            button.text("Follow");
+                            button.toggleClass("following").toggleClass("follow");
+                        }).fail(function () {
+                            alert("Something went wrong!");
+                        });
+                }
+            });
+        })
+    </script>
+}

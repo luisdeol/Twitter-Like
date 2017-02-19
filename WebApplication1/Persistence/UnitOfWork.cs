@@ -1,5 +1,6 @@
-﻿using WebApplication1.Models;
-using WebApplication1.Repositories;
+﻿using WebApplication1.Core;
+using WebApplication1.Core.Repositories;
+using WebApplication1.Persistence.Repositories;
 
 namespace WebApplication1.Persistence
 {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using WebApplication1.Models;
+using WebApplication1.Core.Models;
 
-namespace WebApplication1.ViewModels
+namespace WebApplication1.Core.ViewModels
 {
     public class TweetsViewModel
     {

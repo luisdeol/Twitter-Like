@@ -1,4 +1,4 @@
-﻿namespace WebApplication1.Dtos
+﻿namespace WebApplication1.Core.Dtos
 {
     public class ReplyDto
     {

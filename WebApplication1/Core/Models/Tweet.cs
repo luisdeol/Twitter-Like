@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Core.Models
 {
     public class Tweet
     {

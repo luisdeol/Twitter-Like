@@ -5,7 +5,8 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using WebApplication1.Models;
+using WebApplication1.Core.Models;
+using WebApplication1.Persistence;
 
 namespace WebApplication1
 {

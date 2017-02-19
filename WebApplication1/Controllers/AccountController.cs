@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebApplication1.Models;
+using WebApplication1.Core.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -153,7 +153,7 @@ namespace WebApplication1.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
-                    MyUserInfo = new MyUserInfo() { Username = model.Name }
+                    MyUserInfo = new MyUserInfo() { Username = model.Name}
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
