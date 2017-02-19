@@ -236,10 +236,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\controllers\followingController.js" />
     <Content Include="Scripts\app\controllers\likesController.js" />
     <Content Include="Scripts\app\controllers\replyController.js" />
     <Content Include="Scripts\app\controllers\reportsController.js" />
     <Content Include="Scripts\app\controllers\retweetsController.js" />
+    <Content Include="Scripts\app\services\followingService.js" />
     <Content Include="Scripts\app\services\likeService.js" />
     <Content Include="Scripts\app\services\replyService.js" />
     <Content Include="Scripts\app\services\reportsService.js" />

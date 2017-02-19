@@ -78,7 +78,8 @@
             LikesController.init("#tweets");
             ReportsController.init("#tweets");
             ReplyController.init("#tweets");
-            $(".js-follow").click(function(e) {
+            FollowingController.init("#tweets");
+            /*$(".js-follow").click(function(e) {
                 var button = $(e.target);
                 if (button.hasClass("follow")) {
                     $.post("/api/followings/", { FolloweeId: button.attr("followee-id") })
@@ -101,7 +102,7 @@
                             alert("Something went wrong!");
                         });
                 }
-            });
+            });*/
         });
     </script>
 }

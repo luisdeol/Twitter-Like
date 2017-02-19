@@ -6,7 +6,7 @@
 
 <h2> @Model.ProfileUsername Profile </h2>
 
-<table class="table">
+<table class="table" id="profile">
     <tr>
         <th>
             UserName
@@ -39,30 +39,7 @@
 @section Scripts{
     <script>
         $(document).ready(function () {
-            $(".js-follow").click(function (e) {
-                var button = $(e.target);
-                if (button.hasClass("follow")) {
-                    $.post("/api/followings/", { FolloweeId: button.attr("followee-id") })
-                        .done(function () {
-                            button.text("Following");
-                            button.toggleClass("following").toggleClass("follow");
-                        })
-                        .fail(function () {
-                            alert("Something went wrong!");
-                        });
-                } else {
-                    $.ajax({
-                        url: "/api/followings/" + button.attr("followee-id"),
-                        type: "DELETE"
-                    })
-                        .done(function () {
-                            button.text("Follow");
-                            button.toggleClass("following").toggleClass("follow");
-                        }).fail(function () {
-                            alert("Something went wrong!");
-                        });
-                }
-            });
+            FollowingController.init("#profile");
         })
     </script>
 }
