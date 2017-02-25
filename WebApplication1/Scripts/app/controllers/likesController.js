@@ -8,9 +8,10 @@
     var giveLike = function(e) {
         button = $(e.target);
         var tweetId = button.attr("data-tweet-id");
-
+        var userId = button.attr("data-user-id");
+        console.log(userId);
         if (button.hasClass("like"))
-            likeService.like(tweetId, done, fail);
+            likeService.like(tweetId, userId, done, fail);
         else
             likeService.cancelLike(tweetId, done, fail);
     };

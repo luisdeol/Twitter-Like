@@ -55,11 +55,11 @@
                 @if (Model.IsAuthenticated)
                 {
                     <td>
-                        <button class="btn btn-link js-reply" data-username="@tweet.User.Name" data-tweet-id="@tweet.Id"> Reply </button>
+                        <button class="btn btn-link js-reply" data-username="@tweet.User.Name" data-user-id="@tweet.UserId" data-tweet-id="@tweet.Id"> Reply </button>
                         <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-tweet-id="@tweet.Id">
                             @(Model.Retweets.Contains(@tweet.Id) ? "Retweeted" : "Retweet")
                         </button>
-                        <button class="btn btn-link js-like @(Model.Likes.Contains(@tweet.Id) ? "liked" : "like") " data-tweet-id="@tweet.Id">
+                        <button class="btn btn-link js-like @(Model.Likes.Contains(@tweet.Id) ? "liked" : "like")" data-user-id="@tweet.UserId" data-tweet-id="@tweet.Id">
                             @(Model.Likes.Contains(@tweet.Id) ? "Liked" : "Like")
                         </button>
                         <button class="btn btn-link js-report" data-username="@tweet.User.Name" data-tweet-id="@tweet.Id">

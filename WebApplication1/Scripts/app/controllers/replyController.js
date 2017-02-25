@@ -21,14 +21,24 @@
                     label: "Reply",
                     className: "btn-info",
                     callback: function () {
-                        $.ajax({
-                            url: "/api/replies/",
-                            type: "POST",
-                            data: JSON.stringify({ TweetId: button.attr("data-tweet-id"), ReplyContent: $("#reply-content").val() }),
-                            contentType: "application/json"
-                        })
-                        .done(function(){})
-                        .fail(function(){});
+                        replyService.createReply(
+                            button.attr("data-tweet-id"),
+                            $("#reply-content").val(),
+                            button.attr("data-user-id"),
+                            done,
+                            fail);
+                        //$.ajax({
+                        //    url: "/api/replies/",
+                        //    type: "POST",
+                        //    data: JSON.stringify({
+                        //        TweetId: button.attr("data-tweet-id"),
+                        //        ReplyContent: $("#reply-content").val(),
+                        //        UserId: button.attr("data-user-id")
+                        //    }),
+                        //    contentType: "application/json"
+                        //})
+                        //.done(function(){})
+                        //.fail(function(){});
                         //replyService.createReply(100,
                         //$("#reply-content").val(), done, fail);
                     }

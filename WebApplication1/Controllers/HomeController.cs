@@ -22,19 +22,5 @@ namespace WebApplication1.Controllers
             var tweets = _unitOfWork.Tweets.GetNewerTweets(userId);
             return RedirectToAction("Index", "Tweets", tweets);
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }

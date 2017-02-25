@@ -4,5 +4,6 @@
     {
         public int TweetId { get; set; }
         public string ReplyContent { get; set; }
+        public string UserId { get; set; }
     }
 }

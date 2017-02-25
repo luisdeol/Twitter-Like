@@ -24,6 +24,8 @@ namespace WebApplication1.Controllers.Api
             var claim = claims?.First();
             var userId = claim?.Value;
             var activity = new Activity(userId, dto.TweetId, ActivityTypes.TweetReply, dto.ReplyContent);
+            var notification = Notification.Replied(userId, dto.TweetId, dto.UserId);
+            _context.Notifications.Add(notification);
             _context.Activities.Add(activity);
             _context.SaveChanges();
             return Ok();

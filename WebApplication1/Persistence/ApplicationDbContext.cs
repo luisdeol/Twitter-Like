@@ -15,6 +15,7 @@ namespace WebApplication1.Persistence
         public DbSet<Activity> Activities { get; set; }
         public DbSet<MyUserInfo> MyUserInfos { get; set; }
         public DbSet<Following> Followings { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public static ApplicationDbContext Create()
         {

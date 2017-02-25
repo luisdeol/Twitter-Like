@@ -194,12 +194,22 @@
     <Compile Include="Core\Dtos\ActivityDto.cs" />
     <Compile Include="Core\Dtos\FollowDto.cs" />
     <Compile Include="Core\Dtos\ReplyDto.cs" />
+    <Compile Include="Core\Models\Notification.cs" />
+    <Compile Include="Core\Models\NotificationType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201702100145313_InitialMigration.cs" />
     <Compile Include="Migrations\201702100145313_InitialMigration.Designer.cs">
       <DependentUpon>201702100145313_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702251743518_Add Notification.cs" />
+    <Compile Include="Migrations\201702251743518_Add Notification.Designer.cs">
+      <DependentUpon>201702251743518_Add Notification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702251750159_Add IsRead to Notification.cs" />
+    <Compile Include="Migrations\201702251750159_Add IsRead to Notification.Designer.cs">
+      <DependentUpon>201702251750159_Add IsRead to Notification.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Core\Models\AccountViewModels.cs" />
@@ -319,6 +329,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702100145313_InitialMigration.resx">
       <DependentUpon>201702100145313_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702251743518_Add Notification.resx">
+      <DependentUpon>201702251743518_Add Notification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702251750159_Add IsRead to Notification.resx">
+      <DependentUpon>201702251750159_Add IsRead to Notification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -33,6 +33,8 @@ namespace WebApplication1.Controllers.Api
             var like = new Activity(userId, dto.TweetId, ActivityTypes.TweetLike);
 
             _context.Activities.Add(like);
+            var notification = Notification.Liked(userId, dto.TweetId, dto.UserId);
+            _context.Notifications.Add(notification);
             _context.SaveChanges();
             return Ok();
         }

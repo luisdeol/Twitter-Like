@@ -3,5 +3,6 @@
     public class ActivityDto
     {
         public int TweetId { get; set; }
+        public string UserId { get; set; }
     }
 }

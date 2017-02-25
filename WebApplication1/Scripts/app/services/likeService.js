@@ -1,6 +1,11 @@
 ﻿var LikeService = function () {
-    var like = function(tweetId, done, fail) {
-        $.post("/api/likes", { TweetId : tweetId })
+    var like = function(tweetId, userId, done, fail) {
+        $.ajax({
+            url: "/api/likes/",
+            type: "POST",
+            data: JSON.stringify({ TweetId: tweetId, UserId: userId }),
+            contentType: "application/json"
+        })
             .done(done)
             .fail(fail);
     };
