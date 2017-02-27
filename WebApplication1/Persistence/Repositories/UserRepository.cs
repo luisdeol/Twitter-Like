@@ -13,9 +13,9 @@ namespace WebApplication1.Persistence.Repositories
         {
             _context = context;
         }
-        public List<MyUserInfo> GetUsers(string userName)
+        public List<UserProfile> GetUsers(string userName)
         {
-            return _context.MyUserInfos.Where(u=> u.Username==userName).ToList();
+            return _context.UserProfiles.Where(u=> u.Username==userName).ToList();
         }
     }
 }

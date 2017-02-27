@@ -13,7 +13,7 @@ namespace WebApplication1.Persistence
 
         public DbSet<Tweet> Tweets { get; set; }
         public DbSet<Activity> Activities { get; set; }
-        public DbSet<MyUserInfo> MyUserInfos { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Following> Followings { get; set; }
         public DbSet<Notification> Notifications { get; set; }
 
@@ -24,11 +24,6 @@ namespace WebApplication1.Persistence
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<IdentityUser>()
-                .ToTable("Users");
-            modelBuilder.Entity<ApplicationUser>()
-                .ToTable("Users");
-
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(f=> f.Followees)
                 .WithRequired(f=> f.Follower)
@@ -38,6 +33,7 @@ namespace WebApplication1.Persistence
                 .HasMany(f=> f.Followers)
                 .WithRequired(f=> f.Followee)
                 .WillCascadeOnDelete(false);
+
             base.OnModelCreating(modelBuilder);
         }
 

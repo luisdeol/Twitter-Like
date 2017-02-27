@@ -5,6 +5,6 @@ namespace WebApplication1.Core.Repositories
 {
     public interface IUserRepository
     {
-        List<MyUserInfo> GetUsers(string userName);
+        List<UserProfile> GetUsers(string userName);
     }
 }

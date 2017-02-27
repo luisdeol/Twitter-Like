@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Core.Models;
+using WebApplication1.Persistence;
 
 namespace WebApplication1.Controllers
 {
@@ -153,10 +154,21 @@ namespace WebApplication1.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
-                    MyUserInfo = new MyUserInfo() { Username = model.Name}
+                    UserProfileName = model.Name
                 };
 
+                var userProfile = new UserProfile()
+                {
+                    Username = model.Name,
+                    UserId = user.Id
+                };
+
+                var context = new ApplicationDbContext();
+                context.UserProfiles.Add(userProfile);
+                context.SaveChanges();
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

@@ -79,30 +79,6 @@
             ReportsController.init("#tweets");
             ReplyController.init("#tweets");
             FollowingController.init("#tweets");
-            /*$(".js-follow").click(function(e) {
-                var button = $(e.target);
-                if (button.hasClass("follow")) {
-                    $.post("/api/followings/", { FolloweeId: button.attr("followee-id") })
-                        .done(function() {
-                            button.text("Following");
-                            button.toggleClass("following").toggleClass("follow");
-                        })
-                        .fail(function() {
-                            alert("Something went wrong!");
-                        });
-                } else {
-                    $.ajax({
-                        url: "/api/followings/"+button.attr("followee-id"),
-                        type: "DELETE"
-                        })
-                        .done(function() {
-                            button.text("Follow");
-                            button.toggleClass("following").toggleClass("follow");
-                        }).fail(function() {
-                            alert("Something went wrong!");
-                        });
-                }
-            });*/
         });
     </script>
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WebApplication1.Core.Models
 {
@@ -10,7 +10,7 @@ namespace WebApplication1.Core.Models
     public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
-        public virtual MyUserInfo MyUserInfo { get; set; }
+        public string UserProfileName { get; set; }
 
         public ICollection<Following> Followers { get; set; }
         public ICollection<Following> Followees { get; set; }
