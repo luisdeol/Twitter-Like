@@ -6,10 +6,10 @@ namespace WebApplication1.Core.Repositories
 {
     public interface IActivityRepository
     {
-        ILookup<int, Activity> GetLookupRetweets(string userId);
-        IEnumerable<Activity> GetMyActivities(string userId);
-        ILookup<int, Activity> GetLookupLikes(string userId);
-        ILookup<int, Activity> GetLookupReports(string userId);
-        IEnumerable<Tweet> GetRetweetedTweets(string userId);
+        ILookup<int, Activity> GetLookupRetweets(int userId);
+        IEnumerable<Activity> GetMyActivities(int userId);
+        ILookup<int, Activity> GetLookupLikes(int userId);
+        ILookup<int, Activity> GetLookupReports(int userId);
+        IEnumerable<Tweet> GetRetweetedTweets(int userId);
     }
 }

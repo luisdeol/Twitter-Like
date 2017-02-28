@@ -23,11 +23,11 @@ namespace WebApplication1.Controllers.Api
             var claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
-
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
             var following = new Following
             {
-                FolloweeId = dto.FolloweeId,
-                FollowerId = userId
+                FolloweeId = int.Parse(dto.FolloweeId),
+                FollowerId = userProfileId
             };
             _context.Followings.Add(following);
             _context.SaveChanges();
@@ -41,9 +41,10 @@ namespace WebApplication1.Controllers.Api
             var claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
-
-            var follow = _context.Followings.SingleOrDefault(f => f.FollowerId == userId &&
-                                                                  f.FolloweeId == id);
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
+            var followeeId = int.Parse(id);
+            var follow = _context.Followings.SingleOrDefault(f => f.FollowerId == userProfileId &&
+                                                                  f.FolloweeId == followeeId);
             if (follow != null) _context.Followings.Remove(follow);
             _context.SaveChanges();
             return Ok();

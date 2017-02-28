@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebApplication1.Core;
 using WebApplication1.Core.ViewModels;
 using WebApplication1.Persistence;
@@ -18,8 +17,7 @@ namespace WebApplication1.Controllers
         // GET: Tweets
         public ActionResult Index()
         {
-
-            var userId = User.Identity.GetUserId();
+            var userId = int.Parse(Session["sessionString"].ToString());
             var tweets = _unitOfWork.Tweets.GetNewerTweets(userId);
             var likes = _unitOfWork.Activities.GetLookupLikes(userId);
             var retweets = _unitOfWork.Activities.GetLookupRetweets(userId);
@@ -50,7 +48,7 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TweetsViewModel vm)
         {
-            var userId = User.Identity.GetUserId();
+            var userId = int.Parse(Session["sessionString"].ToString());
             _unitOfWork.Tweets.AddTweet(vm.TweetFormViewModel.Content, userId);
             _unitOfWork.Complete();
 
@@ -60,7 +58,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult Mine()
         {
-            var userId = User.Identity.GetUserId();
+            var userId = int.Parse(Session["sessionString"].ToString());
             var tweets = _unitOfWork.Tweets.Mine(userId);
 
             return View(tweets);
@@ -69,7 +67,7 @@ namespace WebApplication1.Controllers
         [Authorize]
         public ActionResult MyActivities()
         {
-            string userId = User.Identity.GetUserId();
+            var userId = int.Parse(Session["sessionString"].ToString());
             var likes = _unitOfWork.Activities.GetMyActivities(userId);
 
             return View(likes);

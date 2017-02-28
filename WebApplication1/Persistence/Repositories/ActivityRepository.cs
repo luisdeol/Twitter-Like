@@ -15,7 +15,7 @@ namespace WebApplication1.Persistence.Repositories
             _context = context;
         }
 
-        public ILookup<int, Activity> GetLookupLikes(string userId)
+        public ILookup<int, Activity> GetLookupLikes(int userId)
         {
             return _context.Activities
                 .Where(l => l.UserId == userId && 
@@ -25,7 +25,7 @@ namespace WebApplication1.Persistence.Repositories
                 .ToLookup(l => l.TweetId);
         }
 
-        public ILookup<int, Activity> GetLookupRetweets(string userId)
+        public ILookup<int, Activity> GetLookupRetweets(int userId)
         {
             return _context.Activities
                 .Where(r => r.UserId == userId &&
@@ -33,7 +33,7 @@ namespace WebApplication1.Persistence.Repositories
                 .ToList()
                 .ToLookup(r => r.TweetId);
         }
-        public ILookup<int, Activity> GetLookupReports(string userId)
+        public ILookup<int, Activity> GetLookupReports(int userId)
         {
             return _context.Activities
                 .Where(r => r.UserId == userId &&
@@ -41,7 +41,7 @@ namespace WebApplication1.Persistence.Repositories
                 .ToList()
                 .ToLookup(r => r.TweetId);
         }
-        public IEnumerable<Activity> GetMyActivities(string userId)
+        public IEnumerable<Activity> GetMyActivities(int userId)
         {
             return _context.Activities
                 .Include(l => l.Tweet)
@@ -50,7 +50,7 @@ namespace WebApplication1.Persistence.Repositories
                 .Where(l => l.UserId == userId);
         }
 
-        public IEnumerable<Tweet> GetRetweetedTweets(string userId)
+        public IEnumerable<Tweet> GetRetweetedTweets(int userId)
         {
             return _context.Activities
                 .Where(a => a.UserId == userId && a.ActivityType == ActivityTypes.TweetRetweet)

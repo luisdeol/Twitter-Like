@@ -12,17 +12,18 @@ namespace WebApplication1.Core.Models
 
         public DateTime CreatedAt { get; set; }
 
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public int UserId { get; set; }
+        public UserProfile User { get; set; }
 
         public ICollection<Activity> Activities { get; private set; }
+        public ICollection<Notification> Notifications { get; set; }
 
         public Tweet()
         {
             Activities = new Collection<Activity>();
         }
 
-        public Tweet(string content, string userId)
+        public Tweet(string content, int userId)
         {
             CreatedAt = DateTime.Now;
             Content = content;

@@ -7,7 +7,7 @@ namespace WebApplication1.Core.Models
     {
         [Key]
         [Column(Order = 1)]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [Key]
         [Column(Order = 2)]
@@ -19,7 +19,7 @@ namespace WebApplication1.Core.Models
 
         public string Content { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public UserProfile User { get; set; }
         public Tweet Tweet { get; set; }
 
         public Activity()
@@ -27,7 +27,7 @@ namespace WebApplication1.Core.Models
             
         }
 
-        public Activity(string userId, int tweetId, ActivityTypes type, string content = "")
+        public Activity(int userId, int tweetId, ActivityTypes type, string content = "")
         {
             UserId = userId;
             TweetId = tweetId;

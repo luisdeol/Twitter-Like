@@ -6,13 +6,13 @@
 
 <table class="table">
     <tr>
-        <th> @Html.DisplayNameFor(t=>t.User.UserName)</th>
+        <th> @Html.DisplayNameFor(t=>t.User.Username)</th>
         <th>@Html.DisplayNameFor(t=>t.Content)</th>
     </tr>
     @foreach (var tweet in Model)
     {
         <tr>
-            <td> @tweet.User.UserName </td>
+            <td> @tweet.User.Username </td>
             <td> @tweet.Content </td>
         </tr>
     }

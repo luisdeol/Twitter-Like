@@ -13,17 +13,17 @@ namespace WebApplication1.Persistence.Repositories
             _context = context;
         }
 
-        public ILookup<string, Following> GetLookupFollowings(string userId)
+        public ILookup<int, Following> GetLookupFollowings(int userId)
         {
             return _context.Followings.Where(f => f.FollowerId == userId)
                 .ToList()
                 .ToLookup(f => f.FolloweeId);
         }
 
-        public bool GetIsFollowing(string userId, string visitUsername)
+        public bool GetIsFollowing(int userId, string userName)
         {
             var c = _context.Followings
-                .Any(f => f.Followee.Name == visitUsername &&
+                .Any(f => f.Followee.Username == userName &&
                                                 f.FollowerId == userId);
             return c;
         }

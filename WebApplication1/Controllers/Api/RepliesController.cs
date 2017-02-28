@@ -23,8 +23,9 @@ namespace WebApplication1.Controllers.Api
             var claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
-            var activity = new Activity(userId, dto.TweetId, ActivityTypes.TweetReply, dto.ReplyContent);
-            var notification = Notification.Replied(userId, dto.TweetId, dto.UserId);
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
+            var activity = new Activity(userProfileId, dto.TweetId, ActivityTypes.TweetReply, dto.ReplyContent);
+            var notification = Notification.Replied(userProfileId, dto.TweetId, int.Parse(dto.UserId));
             _context.Notifications.Add(notification);
             _context.Activities.Add(activity);
             _context.SaveChanges();
@@ -38,9 +39,10 @@ namespace WebApplication1.Controllers.Api
             var claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
             var reply = _context.Activities.SingleOrDefault(a => a.TweetId == id &&
                                                                  a.ActivityType == ActivityTypes.TweetReply &&
-                                                                 a.UserId == userId);
+                                                                 a.UserId == userProfileId);
             if (reply == null)
                 return BadRequest();
             _context.Activities.Remove(reply);

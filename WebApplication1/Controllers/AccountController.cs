@@ -157,22 +157,25 @@ namespace WebApplication1.Controllers
                     UserProfileName = model.Name
                 };
 
-                var userProfile = new UserProfile()
-                {
-                    Username = model.Name,
-                    UserId = user.Id
-                };
-
-                var context = new ApplicationDbContext();
-                context.UserProfiles.Add(userProfile);
-                context.SaveChanges();
-
                 var result = await UserManager.CreateAsync(user, model.Password);
                 
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    var userProfile = new UserProfile()
+                    {
+                        Username = model.Name,
+                        UserId = user.Id
+                    };
+
+                    var context = new ApplicationDbContext();
+                    context.UserProfiles.Add(userProfile);
+                    context.SaveChanges();
+
+                    var profileId = context.UserProfiles.Where(u=> u.UserId == user.Id).Select(up => up.Id).First();
+                    System.Web.HttpContext.Current.Session["sessionString"] = profileId;
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

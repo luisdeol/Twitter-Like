@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -11,9 +10,6 @@ namespace WebApplication1.Core.Models
     {
         public string Name { get; set; }
         public string UserProfileName { get; set; }
-
-        public ICollection<Following> Followers { get; set; }
-        public ICollection<Following> Followees { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -7,12 +7,12 @@ namespace WebApplication1.Core.Models
     {
         [Key]
         [Column(Order = 1)]
-        public string FolloweeId { get; set; }
+        public int FolloweeId { get; set; }
         [Key]
         [Column(Order = 2)]
-        public string FollowerId { get; set; }
+        public int FollowerId { get; set; }
 
-        public ApplicationUser Followee { get; set; }
-        public ApplicationUser Follower { get; set; }
+        public UserProfile Followee { get; set; }
+        public UserProfile Follower { get; set; }
     }
 }

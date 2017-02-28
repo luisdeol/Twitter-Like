@@ -12,6 +12,6 @@ namespace WebApplication1.Core.ViewModels
         public ILookup<int, Activity> Likes { get; set; }
         public ILookup<int, Activity> Retweets { get; set; }
         public ILookup<int, Activity> Reports { get; set; }
-        public ILookup<string, Following> Followings { get; set; }
+        public ILookup<int, Following> Followings { get; set; }
     }
 }

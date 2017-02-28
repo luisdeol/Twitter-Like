@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using WebApplication1.Core;
 using WebApplication1.Core.ViewModels;
 using WebApplication1.Persistence;
@@ -18,21 +16,23 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Profiles
-        public ActionResult ShowProfile(string visitUserId)
+        public ActionResult ShowProfile(string username)
         {
-            var userId = User.Identity.GetUserId();
+            var userId = int.Parse(Session["sessionString"].ToString());
+            var visitProfile = _unitOfWork.Users.GetUserProfile(username);
 
-            var tweets = _unitOfWork.Tweets.GetTweetsByUsername(visitUserId);
-            var userName = tweets?.First().User.Name;
-            var retweetedTweets = _unitOfWork.Activities.GetRetweetedTweets(visitUserId);
+            var tweets = _unitOfWork.Tweets.GetTweetsByUserId(visitProfile.Id);
+            
+            var retweetedTweets = _unitOfWork.Activities.GetRetweetedTweets(userId);
 
             tweets?.AddRange(retweetedTweets);
 
-            var isFollowing = _unitOfWork.Followings.GetIsFollowing(userId, userName);
+            var isFollowing = _unitOfWork.Followings.GetIsFollowing(userId, username);
+
             var viewModel = new ProfileViewModel
             {
-                ProfileUsername = userName,
-                UserId = visitUserId,
+                ProfileUsername = username,
+                UserId = visitProfile.Id,
                 Tweets = tweets,
                 IsFollowing = isFollowing
             };

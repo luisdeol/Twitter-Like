@@ -8,10 +8,10 @@ namespace WebApplication1.Core.Models
         public NotificationType Type { get; set; }
         public DateTime DateTime { get; set; }
 
-        public string ActorId { get; set; }
-        public ApplicationUser Actor { get; set; }
+        public int ActorId { get; set; }
+        public UserProfile Actor { get; set; }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public int TweetId { get; set; }
         public Tweet Tweet { get; set; }
@@ -23,7 +23,7 @@ namespace WebApplication1.Core.Models
 
         }
 
-        public Notification(NotificationType type, string actorId, string userId)
+        public Notification(NotificationType type, int actorId, int userId)
         {
             Type = type;
             ActorId = actorId;
@@ -31,26 +31,26 @@ namespace WebApplication1.Core.Models
             DateTime = DateTime.Now;
         }
 
-        public static Notification Followed(string actor, string userId)
+        public static Notification Followed(int actor, int userId)
         {
             var notification = new Notification(NotificationType.Followed, actor, userId);
             return notification;
         }
 
-        public static Notification Liked(string actor, int tweetId, string userId)
+        public static Notification Liked(int actor, int tweetId, int userId)
         {
             var notification = new Notification(NotificationType.Liked, actor, userId) {TweetId = tweetId };
 
             return notification;
         }
 
-        public static Notification Retweeted(string actor, int tweetId, string userId)
+        public static Notification Retweeted(int actor, int tweetId, int userId)
         {
             var notification = new Notification(NotificationType.Retweeted, actor, userId) { TweetId = tweetId };
 
             return notification;
         }
-        public static Notification Replied(string actor, int tweetId, string userId)
+        public static Notification Replied(int actor, int tweetId, int userId)
         {
             var notification = new Notification(NotificationType.Retweeted, actor, userId) { TweetId = tweetId };
 

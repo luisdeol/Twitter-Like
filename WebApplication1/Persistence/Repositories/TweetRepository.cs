@@ -15,28 +15,30 @@ namespace WebApplication1.Persistence.Repositories
             _context = context;
         }
 
-        public IEnumerable<Tweet> GetNewerTweets(string userId)
+        public IEnumerable<Tweet> GetNewerTweets(int userId)
         {
+            var followees = _context.Followings.Where(f => f.FollowerId == userId).Select(f=> f.FolloweeId);
             return _context.Tweets
+                .Where(t=> followees.Contains(t.UserId))
                 .Include(t=> t.User)
                 .OrderByDescending(t => t.CreatedAt)
                 .ToList();
         }
 
-        public IEnumerable<Tweet> Mine(string userId)
+        public IEnumerable<Tweet> Mine(int userId)
         {
             return _context.Tweets
                 .Include(t => t.User)
                 .Where(t => t.UserId == userId);
         }
 
-        public void AddTweet(string content, string userId)
+        public void AddTweet(string content, int userId)
         {
             var tweet = new Tweet(content, userId);
             _context.Tweets.Add(tweet);
         }
 
-        public List<Tweet> GetTweetsByUsername(string userId)
+        public List<Tweet> GetTweetsByUserId(int userId)
         {
             return _context.Tweets
                 .Where(t => t.UserId == userId)

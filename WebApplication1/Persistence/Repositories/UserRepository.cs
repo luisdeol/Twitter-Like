@@ -13,9 +13,15 @@ namespace WebApplication1.Persistence.Repositories
         {
             _context = context;
         }
+
         public List<UserProfile> GetUsers(string userName)
         {
-            return _context.UserProfiles.Where(u=> u.Username==userName).ToList();
+            return _context.UserProfiles.Where(u=> u.Username.Contains(userName)).ToList();
+        }
+
+        public UserProfile GetUserProfile(string userName)
+        {
+            return _context.UserProfiles.SingleOrDefault(up => up.Username == userName);
         }
     }
 }

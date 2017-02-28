@@ -23,8 +23,8 @@ namespace WebApplication1.Controllers.Api
             IEnumerable<Claim> claims = identities.Claims;
             Claim claim = claims?.First();
             var userId = claim?.Value;
-            var tweet = _context.Tweets.Single(t => t.Id == id && t.UserId == userId);
-
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
+            var tweet = _context.Tweets.Single(t => t.Id == id && t.UserId == userProfileId);
             if (tweet == null)
                 return BadRequest();
 

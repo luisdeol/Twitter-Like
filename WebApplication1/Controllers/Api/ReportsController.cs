@@ -24,12 +24,12 @@ namespace WebApplication1.Controllers.Api
             IEnumerable<Claim> claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
-
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
             if (_context.Activities.Any(a => a.TweetId == dto.TweetId &&
-                                             a.UserId == userId &&
+                                             a.UserId == userProfileId &&
                                              a.ActivityType == ActivityTypes.TweetReport))
                 return BadRequest();
-            var activity = new Activity(userId, dto.TweetId, ActivityTypes.TweetReport);
+            var activity = new Activity(userProfileId, dto.TweetId, ActivityTypes.TweetReport);
             _context.Activities.Add(activity);
             _context.SaveChanges();
             return Ok();
@@ -42,8 +42,9 @@ namespace WebApplication1.Controllers.Api
             IEnumerable<Claim> claims = identity.Claims;
             var claim = claims?.First();
             var userId = claim?.Value;
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
             var activity = _context.Activities.SingleOrDefault(a => a.TweetId == id &&
-                                                                    a.UserId == userId &&
+                                                                    a.UserId == userProfileId &&
                                                                     a.ActivityType == ActivityTypes.TweetReport);
             if (activity == null)
                 return BadRequest();

@@ -24,14 +24,24 @@ namespace WebApplication1.Persistence
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<UserProfile>()
                 .HasMany(f=> f.Followees)
                 .WithRequired(f=> f.Follower)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<ApplicationUser>()
+            modelBuilder.Entity<UserProfile>()
                 .HasMany(f=> f.Followers)
                 .WithRequired(f=> f.Followee)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tweet>()
+                .HasMany(t=> t.Notifications)
+                .WithRequired(t=> t.Tweet)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tweet>()
+                .HasMany(t => t.Activities)
+                .WithRequired(t => t.Tweet)
                 .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

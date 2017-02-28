@@ -18,7 +18,6 @@
 
     var done = function() {
         var text = (button.text() == "Liked") ? "Like" : "Liked";
-
         button.toggleClass("liked").toggleClass("like").text(text);
     };
 

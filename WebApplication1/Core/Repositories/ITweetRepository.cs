@@ -5,9 +5,9 @@ namespace WebApplication1.Core.Repositories
 {
     public interface ITweetRepository
     {
-        IEnumerable<Tweet> GetNewerTweets(string userId);
-        IEnumerable<Tweet> Mine(string userId);
-        void AddTweet(string content, string userId);
-        List<Tweet> GetTweetsByUsername(string username);
+        IEnumerable<Tweet> GetNewerTweets(int userId);
+        IEnumerable<Tweet> Mine(int userId);
+        void AddTweet(string content, int userId);
+        List<Tweet> GetTweetsByUserId(int username);
     }
 }

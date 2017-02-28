@@ -201,9 +201,9 @@
     </Compile>
     <Compile Include="Core\Models\AccountViewModels.cs" />
     <Compile Include="Core\Models\ActivityTypes.cs" />
-    <Compile Include="Migrations\201702272101402_ExtendAspNetIdentity.cs" />
-    <Compile Include="Migrations\201702272101402_ExtendAspNetIdentity.Designer.cs">
-      <DependentUpon>201702272101402_ExtendAspNetIdentity.cs</DependentUpon>
+    <Compile Include="Migrations\201702281932493_ViroCristaoSeDerCerto.cs" />
+    <Compile Include="Migrations\201702281932493_ViroCristaoSeDerCerto.Designer.cs">
+      <DependentUpon>201702281932493_ViroCristaoSeDerCerto.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
@@ -319,8 +319,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702272101402_ExtendAspNetIdentity.resx">
-      <DependentUpon>201702272101402_ExtendAspNetIdentity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702281932493_ViroCristaoSeDerCerto.resx">
+      <DependentUpon>201702281932493_ViroCristaoSeDerCerto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

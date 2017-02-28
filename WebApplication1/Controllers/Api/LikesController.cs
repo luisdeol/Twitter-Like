@@ -25,15 +25,17 @@ namespace WebApplication1.Controllers.Api
             Claim c = claims?.First();
             string userId = c?.Value;
 
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u=> u.Id).First();
+
             if (_context.Activities.Any(n => n.TweetId == dto.TweetId && 
-                                        n.UserId == userId &&
+                                        n.UserId == userProfileId &&
                                         n.ActivityType == ActivityTypes.TweetLike))
                 return BadRequest();
 
-            var like = new Activity(userId, dto.TweetId, ActivityTypes.TweetLike);
+            var like = new Activity(userProfileId, dto.TweetId, ActivityTypes.TweetLike);
 
             _context.Activities.Add(like);
-            var notification = Notification.Liked(userId, dto.TweetId, dto.UserId);
+            var notification = Notification.Liked(userProfileId, dto.TweetId, int.Parse(dto.UserId));
             _context.Notifications.Add(notification);
             _context.SaveChanges();
             return Ok();
@@ -47,8 +49,10 @@ namespace WebApplication1.Controllers.Api
             Claim claim = claims?.First();
             var userId = claim?.Value;
 
+            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
+
             var like = _context.Activities
-                .Single(l => l.UserId == userId && 
+                .Single(l => l.UserId == userProfileId && 
                              l.TweetId == id && 
                              l.ActivityType == ActivityTypes.TweetLike);
 
