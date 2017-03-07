@@ -50,11 +50,17 @@ namespace WebApplication1.Core.Models
 
             return notification;
         }
+
         public static Notification Replied(int actor, int tweetId, int userId)
         {
             var notification = new Notification(NotificationType.Retweeted, actor, userId) { TweetId = tweetId };
 
             return notification;
+        }
+
+        public void Read()
+        {
+            IsRead = true;
         }
     }
 }
