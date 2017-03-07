@@ -190,6 +190,7 @@
     <Compile Include="Controllers\Api\TweetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\ProfilesController.cs" />
     <Compile Include="Controllers\TweetsController.cs" />
     <Compile Include="Core\Dtos\ActivityDto.cs" />
@@ -306,10 +307,10 @@
     <Content Include="Views\Shared\MyActivities.cshtml" />
     <Content Include="Views\Profiles\Profile.cshtml" />
     <Content Include="Views\Profiles\Search.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Notifications\" />
     <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>

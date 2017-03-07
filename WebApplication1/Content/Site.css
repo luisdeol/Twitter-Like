@@ -26,3 +26,14 @@ textarea {
 textarea {
     resize: none;
 }
+
+.notifications {
+    position: relative;
+}
+
+.notifications .badge {
+    background: #a80a0a;
+    position: absolute;
+    right: -1px;
+    top: 8px;
+}

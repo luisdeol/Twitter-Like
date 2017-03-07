@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApplication1.Core.Models.Notification>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Notifications</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActorId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TweetId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRead)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActorId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TweetId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsRead)
+        </td>
+    </tr>
+}
+
+</table>

@@ -21,7 +21,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Notifications", "", "")</li>
+                    <li class="notifications">
+                        <a href="@Url.Action("Index", "Notifications")">
+                            Notification
+                            <span class="badge js-notifications-count hide"></span>
+                        </a>
+                    </li>
                     <li style="margin-top: 10px; margin-bottom: -5px; width: 300px; margin-left: 460px;">
                         @if (Request.IsAuthenticated)
                         {
@@ -29,7 +34,7 @@
                             {
                                 <div class="form-group">
                                     <div class="input-group" id="searchUsers">
-                                        <input type="text" class="form-control" name="searchQuery" placeholder="Search" />
+                                        <input type="text" class="form-control" name="searchQuery" placeholder="Search"/>
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-search"></i>
                                         </span>
@@ -55,5 +60,20 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
+
+<script>
+    $(document).ready(function() {
+        $.getJSON('api/notifications',
+            function(notifications) {
+                if (notifications.length == 0)
+                    return;
+
+                $('.js-notifications-count')
+                    .text(notifications.length)
+                    .removeClass('hide')
+                    .addClass("animated bounceInDown");
+            });
+    });
+</script>
 </body>
 </html>
