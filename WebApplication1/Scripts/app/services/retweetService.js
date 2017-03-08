@@ -1,8 +1,13 @@
-﻿var RetweetService = function() {
-    var retweet = function(tweetId, done, fail) {
-        $.post("/api/retweets", { TweetId: tweetId })
-            .done(done)
-            .fail(fail);
+﻿var RetweetService = (function() {
+    var retweet = function(tweetId, userId, done, fail) {
+        $.ajax({
+            url: "/api/retweets/",
+            type: "POST",
+            data: JSON.stringify({ TweetId: tweetId, UserId: userId }),
+            contentType: "application/json"
+        })
+           .done(done)
+           .fail(fail);
     };
     var cancelRetweet = function(tweetId, done, fail) {
         $.ajax({
@@ -16,4 +21,4 @@
         retweet: retweet,
         cancelRetweet: cancelRetweet
     }
-}();
+})();

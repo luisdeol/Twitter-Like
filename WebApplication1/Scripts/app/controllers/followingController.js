@@ -1,4 +1,4 @@
-﻿var FollowingController = function (followingService) {
+﻿var FollowingController = (function (followingService) {
 
     var button;
 
@@ -24,4 +24,4 @@
     return {
         init: init
     }
-}(FollowingService);
+})(FollowingService);

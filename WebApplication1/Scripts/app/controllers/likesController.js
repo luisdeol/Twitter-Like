@@ -1,4 +1,4 @@
-﻿var LikesController = function(likeService) {
+﻿var LikesController = (function(likeService) {
 
     var button;
 
@@ -28,4 +28,4 @@
     return {
         init: init
     }
-}(LikeService);
+})(LikeService);

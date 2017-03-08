@@ -1,4 +1,4 @@
-﻿var ReportsController = function() {
+﻿var ReportsController = (function() {
     var button;
     var init = function(container) {
         $(container).on('click', '.js-report', report);
@@ -38,4 +38,4 @@
     return {
         init: init
     };
-}();
+})();

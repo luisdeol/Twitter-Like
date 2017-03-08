@@ -1,4 +1,4 @@
-﻿var ReplyService = function() {
+﻿var ReplyService = (function() {
     var createReply = function(tweetId, replyContent, userId, done, fail) {
         $.ajax({
                 url: "/api/replies/",
@@ -12,4 +12,4 @@
     return {
         createReply: createReply
     };
-}();
+})();

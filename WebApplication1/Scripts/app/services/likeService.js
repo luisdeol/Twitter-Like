@@ -1,4 +1,4 @@
-﻿var LikeService = function () {
+﻿var LikeService = (function () {
     var like = function(tweetId, userId, done, fail) {
         $.ajax({
             url: "/api/likes/",
@@ -21,4 +21,4 @@
         like: like,
         cancelLike: cancelLike
     };
-}();
+})();

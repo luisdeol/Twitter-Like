@@ -15,11 +15,14 @@ namespace WebApplication1
                     "~/Scripts/app/services/retweetService.js",
                     "~/Scripts/app/services/likeService.js",
                     "~/Scripts/app/services/replyService.js",
+                    "~/Scripts/app/services/notificationService.js",
                     "~/Scripts/app/controllers/followingController.js",
                     "~/Scripts/app/controllers/likesController.js",
                     "~/Scripts/app/controllers/retweetsController.js",
                     "~/Scripts/app/controllers/reportsController.js",
-                    "~/Scripts/app/controllers/replyController.js"));
+                    "~/Scripts/app/controllers/replyController.js" ,
+                    "~/Scripts/app/controllers/notificationController.js"
+                    ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

@@ -1,4 +1,4 @@
-﻿var FollowingService = function() {
+﻿var FollowingService =(function() {
     var follow = function(followeeId, done, fail) {
         $.post("/api/followings/", { FolloweeId: followeeId })
             .done(done)
@@ -16,4 +16,4 @@
         follow: follow,
         unfollow: unfollow
     }
-}();
+})();

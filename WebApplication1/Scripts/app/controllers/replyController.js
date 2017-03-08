@@ -1,4 +1,4 @@
-﻿var ReplyController = function(replyService) {
+﻿var ReplyController = (function(replyService) {
     var button;
     var init = function(container) {
         $(container).on("click", ".js-reply", reply);
@@ -54,4 +54,4 @@
     return {
         init: init
     };
-}(ReplyService);
+})(ReplyService);

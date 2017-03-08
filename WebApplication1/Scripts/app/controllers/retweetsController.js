@@ -1,4 +1,4 @@
-﻿var RetweetsController = function(retweetService) {
+﻿var RetweetsController = (function(retweetService) {
     var button;
 
     var init = function(container) {
@@ -8,8 +8,9 @@
     var retweet = function(e) {
         button = $(e.target);
         var tweetId = button.attr("data-tweet-id");
+        var userId = button.attr("data-user-id");
         if (button.hasClass("retweet"))
-            retweetService.retweet(tweetId, done, fail);
+            retweetService.retweet(tweetId, userId, done, fail);
         else
             retweetService.cancelRetweet(tweetId, done, fail);
 
@@ -27,4 +28,4 @@
     return {
         init: init
     }
-}(RetweetService);
+})(RetweetService);
