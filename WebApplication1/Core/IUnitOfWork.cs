@@ -8,6 +8,7 @@ namespace WebApplication1.Core
         IActivityRepository Activities { get; set; }
         IUserRepository Users { get; set; }
         IFollowingRepository Followings { get; set; }
+        INotificationRepository Notifications { get; set; }
         void Complete();
     }
 }
