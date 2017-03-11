@@ -44,7 +44,6 @@
             <tr>
                 <td>
                     <a href="@Url.Action("ShowProfile", "Profiles", new {visitUserId = @tweet.UserId})">
-                        <!--tweet.User.Name-->
                         @tweet.User.Username
                     </a>
                     <button class="btn btn-link js-follow @(Model.Followings.Contains(@tweet.UserId) ? "following" : "follow")" followee-id="@tweet.UserId">
@@ -57,7 +56,7 @@
                 {
                     <td>
                         <button class="btn btn-link js-reply" data-username="@tweet.User.Username" data-user-id="@tweet.UserId" data-tweet-id="@tweet.Id"> Reply </button>
-                        <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-tweet-id="@tweet.Id">
+                        <button class="btn btn-link js-retweet @(Model.Retweets.Contains(@tweet.Id) ? "retweeted" : "retweet") " data-user-id="@tweet.UserId" data-tweet-id="@tweet.Id">
                             @(Model.Retweets.Contains(@tweet.Id) ? "Retweeted" : "Retweet")
                         </button>
                         <button class="btn btn-link js-like @(Model.Likes.Contains(@tweet.Id) ? "liked" : "like")" data-user-id="@tweet.UserId" data-tweet-id="@tweet.Id">
