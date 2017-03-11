@@ -8,11 +8,12 @@ namespace WebApplication1.Controllers.Api
 {
     public class TweetsController : ApiController
     {
-        private readonly ApplicationDbContext _context;
+        private readonly UnitOfWork _unitOfWork;
 
         public TweetsController()
         {
-            _context = new ApplicationDbContext();
+            var context = new ApplicationDbContext();
+            _unitOfWork = new UnitOfWork(context);
         }
         // DELETE api/<controller>/5
 
@@ -23,13 +24,12 @@ namespace WebApplication1.Controllers.Api
             IEnumerable<Claim> claims = identities.Claims;
             Claim claim = claims?.First();
             var userId = claim?.Value;
-            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
-            var tweet = _context.Tweets.Single(t => t.Id == id && t.UserId == userProfileId);
+            var userProfileId = _unitOfWork.Users.GetUserProfileId(userId);
+            var tweet = _unitOfWork.Tweets.FindTweetById(id, userProfileId);
             if (tweet == null)
                 return BadRequest();
-
-            _context.Tweets.Remove(tweet);
-            _context.SaveChanges();
+            _unitOfWork.Tweets.DeleteTweet(tweet);
+            _unitOfWork.Complete();
 
             return Ok();
         }

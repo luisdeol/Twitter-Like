@@ -23,5 +23,13 @@ namespace WebApplication1.Persistence.Repositories
         {
             return _context.UserProfiles.SingleOrDefault(up => up.Username == userName);
         }
+
+        public int GetUserProfileId(string userId)
+        {
+            return _context.UserProfiles
+                .Where(up => up.UserId == userId)
+                .Select(up => up.Id)
+                .First();
+        }
     }
 }

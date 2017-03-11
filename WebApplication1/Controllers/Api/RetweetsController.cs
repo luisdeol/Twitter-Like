@@ -36,7 +36,6 @@ namespace WebApplication1.Controllers.Api
             var notification = Notification.Retweeted(userProfileId, dto.TweetId, int.Parse(dto.UserId));
             _context.Notifications.Add(notification);
             _context.SaveChanges();
-            _context.SaveChanges();
             return Ok();
         }
 

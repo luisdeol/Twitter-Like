@@ -45,5 +45,17 @@ namespace WebApplication1.Persistence.Repositories
                 .Include(t => t.User)
                 .ToList();
         }
+
+        public void DeleteTweet(Tweet tweet)
+        {
+            _context.Tweets
+                .Remove(tweet);
+        }
+
+        public Tweet FindTweetById(int id, int userId)
+        {
+            return _context.Tweets
+                .Single(t => t.Id == id && t.UserId == userId);
+        }
     }
 }

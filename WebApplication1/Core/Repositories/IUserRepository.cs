@@ -7,5 +7,6 @@ namespace WebApplication1.Core.Repositories
     {
         List<UserProfile> GetUsers(string userName);
         UserProfile GetUserProfile(string userName);
+        int GetUserProfileId(string userId);
     }
 }

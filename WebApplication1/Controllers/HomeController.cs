@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNet.Identity;
-using System.Linq;
 using System.Web.Mvc;
 using WebApplication1.Core;
 using WebApplication1.Persistence;
@@ -20,10 +19,8 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var context = new ApplicationDbContext();
-            var profileId = context.UserProfiles.Where(u => u.UserId == userId).Select(up => up.Id).First();
+            var profileId = _unitOfWork.Users.GetUserProfileId(userId);
             Session["sessionString"] = profileId;
-            var profileCheck = Session["sessionString"];
             var tweets = _unitOfWork.Tweets.GetNewerTweets(profileId);
             return RedirectToAction("Index", "Tweets", tweets);
         }

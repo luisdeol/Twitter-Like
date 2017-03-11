@@ -59,5 +59,22 @@ namespace WebApplication1.Persistence.Repositories
                 .Include(a => a.User);
         }
 
+        public void AddActivity(Activity activity)
+        {
+            _context.Activities.Add(activity);
+        }
+
+
+        public Activity GetActivity(int tweetId, ActivityTypes type, int userId)
+        {
+            return _context.Activities.SingleOrDefault(a => a.TweetId == tweetId &&
+                                                                 a.ActivityType == type &&
+                                                                 a.UserId == userId);
+        }
+
+        public void DeleteActivity(Activity activity)
+        {
+            _context.Activities.Remove(activity);
+        }
     }
 }
