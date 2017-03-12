@@ -16,7 +16,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            <a href="@Url.Action("ShowProfile", "Profiles", new {username = item.Username})">
+            <a href="@Url.Action("ShowProfile", "Profiles", new {visitUserId = item.Id})">
                 @item.Username
             </a>
         </td>

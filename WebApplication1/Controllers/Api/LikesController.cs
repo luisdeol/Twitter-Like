@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
+using WebApplication1.Core;
 using WebApplication1.Core.Dtos;
 using WebApplication1.Core.Models;
 using WebApplication1.Persistence;
@@ -10,34 +10,33 @@ namespace WebApplication1.Controllers.Api
 {
     public class LikesController : ApiController
     {
-        private readonly ApplicationDbContext _context;
-
+        private readonly IUnitOfWork _unitOfWork;
         public LikesController()
         {
-            _context = new ApplicationDbContext();
+            var context = new ApplicationDbContext();
+            _unitOfWork = new UnitOfWork(context);
         }
 
         [HttpPost]
         public IHttpActionResult Like(ActivityDto dto)
         {
             var identity = (ClaimsIdentity) User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            Claim c = claims?.First();
-            string userId = c?.Value;
+            var claims = identity.Claims;
+            var c = claims?.First();
+            var userId = c?.Value;
 
-            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u=> u.Id).First();
+            var userProfileId = _unitOfWork.Users.GetUserProfileId(userId);
+            var existingLike = _unitOfWork.Activities.GetActivity(dto.TweetId, ActivityTypes.TweetLike, userProfileId);
 
-            if (_context.Activities.Any(n => n.TweetId == dto.TweetId && 
-                                        n.UserId == userProfileId &&
-                                        n.ActivityType == ActivityTypes.TweetLike))
+            if (existingLike != null)
                 return BadRequest();
 
             var like = new Activity(userProfileId, dto.TweetId, ActivityTypes.TweetLike);
 
-            _context.Activities.Add(like);
+            _unitOfWork.Activities.AddActivity(like);
             var notification = Notification.Liked(userProfileId, dto.TweetId, int.Parse(dto.UserId));
-            _context.Notifications.Add(notification);
-            _context.SaveChanges();
+            _unitOfWork.Notifications.CreateNotification(notification);
+            _unitOfWork.Complete();
             return Ok();
         }
 
@@ -46,21 +45,18 @@ namespace WebApplication1.Controllers.Api
         {
             var identity = (ClaimsIdentity) User.Identity;
             var claims = identity.Claims;
-            Claim claim = claims?.First();
+            var claim = claims?.First();
             var userId = claim?.Value;
 
-            var userProfileId = _context.UserProfiles.Where(up => up.UserId == userId).Select(u => u.Id).First();
+            var userProfileId = _unitOfWork.Users.GetUserProfileId(userId);
 
-            var like = _context.Activities
-                .Single(l => l.UserId == userProfileId && 
-                             l.TweetId == id && 
-                             l.ActivityType == ActivityTypes.TweetLike);
+            var like = _unitOfWork.Activities.GetActivity(id, ActivityTypes.TweetLike, userProfileId);
 
             if (like == null)
                 return BadRequest();
 
-            _context.Activities.Remove(like);
-            _context.SaveChanges();
+            _unitOfWork.Activities.DeleteActivity(like);
+            _unitOfWork.Complete();
 
             return Ok();
         }

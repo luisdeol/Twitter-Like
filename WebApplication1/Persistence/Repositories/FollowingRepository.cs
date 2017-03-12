@@ -20,12 +20,12 @@ namespace WebApplication1.Persistence.Repositories
                 .ToLookup(f => f.FolloweeId);
         }
 
-        public bool GetIsFollowing(int userId, string userName)
+        public bool GetIsFollowing(int userId, int visitUserId)
         {
-            var c = _context.Followings
-                .Any(f => f.Followee.Username == userName &&
+            var isFollowing = _context.Followings
+                .Any(f => f.FolloweeId == visitUserId &&
                                                 f.FollowerId == userId);
-            return c;
+            return isFollowing;
         }
     }
 }

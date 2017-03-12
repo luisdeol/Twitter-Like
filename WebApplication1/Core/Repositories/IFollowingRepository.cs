@@ -6,6 +6,6 @@ namespace WebApplication1.Core.Repositories
     public interface IFollowingRepository
     {
         ILookup<int, Following> GetLookupFollowings(int userId);
-        bool GetIsFollowing(int userId, string visitUsername);
+        bool GetIsFollowing(int userId, int visitUserId);
     }
 }

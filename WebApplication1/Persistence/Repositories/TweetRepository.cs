@@ -17,7 +17,11 @@ namespace WebApplication1.Persistence.Repositories
 
         public IEnumerable<Tweet> GetNewerTweets(int userId)
         {
-            var followees = _context.Followings.Where(f => f.FollowerId == userId).Select(f=> f.FolloweeId);
+            var followees = _context.Followings
+                .Where(f => f.FollowerId == userId)
+                .Select(f=> f.FolloweeId)
+                .ToList();
+            followees.Add(userId);
             return _context.Tweets
                 .Where(t=> followees.Contains(t.UserId))
                 .Include(t=> t.User)

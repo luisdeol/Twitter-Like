@@ -16,10 +16,10 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Profiles
-        public ActionResult ShowProfile(string username)
+        public ActionResult ShowProfile(int visitUserId)
         {
             var userId = int.Parse(Session["sessionString"].ToString());
-            var visitProfile = _unitOfWork.Users.GetUserProfile(username);
+            var visitProfile = _unitOfWork.Users.GetUserProfile(visitUserId);
 
             var tweets = _unitOfWork.Tweets.GetTweetsByUserId(visitProfile.Id);
             
@@ -27,11 +27,11 @@ namespace WebApplication1.Controllers
 
             tweets?.AddRange(retweetedTweets);
 
-            var isFollowing = _unitOfWork.Followings.GetIsFollowing(userId, username);
+            var isFollowing = _unitOfWork.Followings.GetIsFollowing(userId, visitUserId);
 
             var viewModel = new ProfileViewModel
             {
-                ProfileUsername = username,
+                ProfileUsername = visitProfile.Username,
                 UserId = visitProfile.Id,
                 Tweets = tweets,
                 IsFollowing = isFollowing

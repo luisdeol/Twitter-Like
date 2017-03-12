@@ -19,9 +19,9 @@ namespace WebApplication1.Persistence.Repositories
             return _context.UserProfiles.Where(u=> u.Username.Contains(userName)).ToList();
         }
 
-        public UserProfile GetUserProfile(string userName)
+        public UserProfile GetUserProfile(int id)
         {
-            return _context.UserProfiles.SingleOrDefault(up => up.Username == userName);
+            return _context.UserProfiles.SingleOrDefault(up => up.Id == id);
         }
 
         public int GetUserProfileId(string userId)
