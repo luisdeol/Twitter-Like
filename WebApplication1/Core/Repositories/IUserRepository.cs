@@ -8,5 +8,6 @@ namespace WebApplication1.Core.Repositories
         List<UserProfile> GetUsers(string userName);
         UserProfile GetUserProfile(int id);
         int GetUserProfileId(string userId);
+        void EditUserProfile(UserProfile profile);
     }
 }

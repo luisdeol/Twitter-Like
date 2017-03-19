@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using WebApplication1.Core;
+using WebApplication1.Core.Models;
 using WebApplication1.Core.ViewModels;
 using WebApplication1.Persistence;
 
@@ -44,6 +45,21 @@ namespace WebApplication1.Controllers
         {
             var users = _unitOfWork.Users.GetUsers(searchQuery);
             return View(users);
+        }
+
+        public ActionResult Edit()
+        {
+            var userId = int.Parse(Session["sessionString"].ToString());
+            var profile = _unitOfWork.Users.GetUserProfile(userId);
+            return View(profile);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(UserProfile profile)
+        {
+            _unitOfWork.Users.EditUserProfile(profile);
+            _unitOfWork.Complete();
+            return RedirectToAction("ShowProfile", new { visitUserId = profile.Id}); 
         }
     }
 }

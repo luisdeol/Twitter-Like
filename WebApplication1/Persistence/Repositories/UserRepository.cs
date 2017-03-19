@@ -31,5 +31,11 @@ namespace WebApplication1.Persistence.Repositories
                 .Select(up => up.Id)
                 .First();
         }
+
+        public void EditUserProfile(UserProfile profile)
+        {
+            var userProfile = GetUserProfile(profile.Id);
+            userProfile.Username = profile.Username;
+        }
     }
 }
